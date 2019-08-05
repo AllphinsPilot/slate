@@ -1,6 +1,10 @@
 steps:
 - name: 'alpine/bundle'
-  entrypoint: bundle
-  args: ['exec', 'middleman', 'build', '--clean']
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    gem install middleman \
+    && bundle exec middleman build --clean
 - name: gcr.io/cloud-builders/gsutil
-  args: ["-m", "rsync", "-r", "-c", "-d", "./public", "gs://developers.allphins.com"]
+  args: ["-m", "rsync", "-r", "-c", "-d", "./build", "gs://developers.allphins.com"]
