@@ -1,0 +1,6 @@
+steps:
+- name: 'alpine/bundle'
+  entrypoint: bundle
+  args: ['exec', 'middleman', 'build', '--clean']
+- name: gcr.io/cloud-builders/gsutil
+  args: ["-m", "rsync", "-r", "-c", "-d", "./public", "gs://developers.allphins.com"]
