@@ -1,5 +1,5 @@
 steps:
-- name: 'ruby:2.4.6-alpine3.9'
+- name: 'ruby:2.4'
   entrypoint: 'bash'
   args:
   - '-c'
