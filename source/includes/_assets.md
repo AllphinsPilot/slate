@@ -92,7 +92,7 @@ Attribute | Type | Description
 `id` | *string* | Unique identifier for the object.
 `rank` | *float* | Search rank of the asset between 1 (best rank) and 0 (worst rank).
 `name` | *string* | Asset name (usually the most popular).
-`companies` | *object* | List of companies owning the asset.
+`companies` | *object* | List of [`companies`](#companies) owning the asset.
 `status` | *string* | Status of the object (in place, planned or removed).
 `asset_category` | *string* | Major category of an asset.
 `asset_type` | *string* | Asset type.
@@ -533,8 +533,64 @@ This endpoint retrieves a specific asset.
 
 `GET https://app.allphins.com/api/v1/assets/:id/`
 
-### URL Parameters
+### URL Arguments
 
-Parameter | Description
+Argument | Description
 --------- | -----------
 `id` | The ID of the asset to retrieve
+
+### The asset objects
+
+The asset object contains both the generic fields and the category specific fields.
+
+**Generic Attributes**
+
+Attribute | Type | Description
+--------- | ------- | -----------
+`id` | *string* | Unique identifier for the object.
+`rank` | *float* | Search rank of the asset between 1 (best rank) and 0 (worst rank).
+`name` | *string* | Asset name (usually the most popular).
+`companies` | *object* | List of [`companies`](#companies) owning the asset.
+`status` | *string* | Status of the object (in place, planned or removed).
+`asset_category` | *string* | Major category of an asset.
+`asset_type` | *string* | Asset type.
+`asset_subtype` | *list of strings* | Subtype of an asset.
+`country` | *string* | Country name.
+`country_code` | *string* | Country code.
+`spatio_temp_position` | *list of objects* | List of the related spacio-temporal position (oil field, mining site, wind farm etc..).
+`images` | *list of strings* | List of images urls.
+`flags` | *list of objects* | List of [flags](#flags) with their status (raised, error).
+`news` | *list of objects* | List of news concerning the asset.
+`linked_assets` | *list of objects* | List of assets dependencies.
+`indicators` | *object* | Simple statistics on the asset.
+`production` | *list of objects* | List of production metrics.
+`location` | *list of objects* | List of lcoations.
+`aliases` | *list of strings* | List of possible aliases.
+`installation_date` | *integer* | Installation year.
+`installation_date_normalized` | *timestamp* | Installation date.
+`general_comment` | *string* | Comment on the asset.
+`capex_estimate` | *float* | Estimated replacement value in Million dollars.
+`created_at` | *timestamp* | Creation date of the asset.
+`updated_at` | *timestamp* | last update on the asset.
+`completeness` | *float* | Data completion of the asset (deprecated).
+`validation` | *boolean* | Manual validation of the asset.
+`other_info` | *object* | Json with additional data.
+`search_vector` | *string* | Search vector (used for search).
+`initiated_by` | *string* | User who created the asset (if asset doesn't belong to Allphins DB).
+`terms` | *list of objects* | List of terms related to this asset.
+
+
+
+**Specific Attributes**
+
+Specific attributes depend of the asset category, here is a list of the possible categories:
+
+* Offshore Installation
+* Onshore Installation
+* Well
+* Pipeline
+* Ship
+* Offshore Mobile
+
+Every category has it's own attributes.
+

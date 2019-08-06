@@ -3,15 +3,18 @@ title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
 
 toc_footers:
   - <a href='https://www.allphins.com/'>Sign Up for a Developer Key</a>
 
 includes:
   - assets
+  - companies
+  - countries
+  - flags
+  - portfolios
+  - exposures
+  - extract
   - errors
 
 search: true
