@@ -214,7 +214,7 @@ curl https://app.allphins.com/api/v1/flags/
 }
 ```
 
-This endpoint retrieves all countries.
+This endpoint retrieves all flags.
 
 ### HTTP Request
 
@@ -222,7 +222,7 @@ This endpoint retrieves all countries.
 
 ### The flag object
 
-A flag is a recipe to compute a specific risk for a given asset. This allows us to automatically compute if an asset is in a hurricane zone, or if the oil field reserve is low.
+A flag is a recipe to compute a specific risk for a given asset. This allows us to automatically compute if an asset is in a hurricane zone, or if the field reserves are low etc...
 
 #### Attributes
 
@@ -238,6 +238,7 @@ Attribute | Type | Description
 `operator` | *string* | Boolean operator.
 `value` | *string*, *float*, *integer*, *object* | Value to compare to the result of the function.
 
+<aside class="info">If you want to use locations in your flags (like a hurricane zone) you can build your own zone on the <a target="_blank" href="https://maps.allphins.com/">Allphins zone builder</a>.</aside>
 
 ## Retrieve a flag
 
@@ -272,4 +273,4 @@ This endpoint retrieves a specific flag.
 
 Argument | Description
 --------- | -----------
-`id` | The ID of the flag to retrieve
+`id` | The ID of the flag to retrieve.

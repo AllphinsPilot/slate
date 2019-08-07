@@ -471,7 +471,6 @@ curl https://app.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
         "Benguela Belize CPT",
         "BB CPT"
     ],
-    "source": "IH86",
     "asset_category": "offshore_installation",
     "asset_type": "Offshore Fixed",
     "asset_subtype": [
@@ -594,3 +593,229 @@ Specific attributes depend of the asset category, here is a list of the possible
 
 Every category has it's own attributes.
 
+
+## Retrieve asset dependencies
+
+```shell
+curl https://app.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445/dag/
+  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "nodes": [
+        {
+            "id": "9f63a81b-ca34-4043-ada9-dcf41cdfe445",
+            "name": "BB-CPT",
+            "status": "In place",
+            "asset_category": "offshore_installation",
+            "asset_type": "Offshore Fixed",
+            "asset_subtype": [
+                "CT/CPT (Compliant Piled Tower)"
+            ],
+            "country_code": "AO",
+            "color": "red",
+            "stream": "main"
+        },
+        {
+            "id": "ef5d48f8-9c0c-4a04-8050-68f939fe6f0f",
+            "name": "BBLT-A",
+            "status": "In place",
+            "asset_category": "offshore_installation",
+            "asset_type": "Subsea",
+            "asset_subtype": [
+                "Underwater Manifold"
+            ],
+            "country_code": "AO",
+            "stream": "up",
+            "color": "blue"
+        },
+        {
+            "id": "601163ec-70b9-444d-813c-51ff3e9f7be9",
+            "name": "BBLT-B",
+            "status": "In place",
+            "asset_category": "offshore_installation",
+            "asset_type": "Subsea",
+            "asset_subtype": [
+                "Underwater Manifold"
+            ],
+            "country_code": "AO",
+            "stream": "up",
+            "color": "blue"
+        },
+        {
+            "id": "b930f8a7-5577-4952-9f5c-2c9b66405534",
+            "name": "BBLT-C",
+            "status": "In place",
+            "asset_category": "offshore_installation",
+            "asset_type": "Subsea",
+            "asset_subtype": [
+                "Underwater Manifold"
+            ],
+            "country_code": "AO",
+            "stream": "up",
+            "color": "blue"
+        },
+        {
+            "id": "244c769f-7d7c-4179-a940-2d750540ac57",
+            "name": "Nemba SNX",
+            "status": "In place",
+            "asset_category": "offshore_installation",
+            "asset_type": "Offshore Fixed",
+            "asset_subtype": [
+                "Piled"
+            ],
+            "country_code": "AO",
+            "stream": "down",
+            "color": "green"
+        },
+        {
+            "id": "36b7797f-31cb-472b-8378-05c30ab147c8",
+            "name": "Kokongo A",
+            "status": "In place",
+            "asset_category": "offshore_installation",
+            "asset_type": "Offshore Fixed",
+            "asset_subtype": [
+                "Piled"
+            ],
+            "country_code": "AO",
+            "stream": "down",
+            "color": "green"
+        },
+        {
+            "id": "454ac9fc-a4c4-4f84-a14f-f1e520aa3fdb",
+            "name": "Kokongo A Flare",
+            "status": "In place",
+            "asset_category": "offshore_installation",
+            "asset_type": "Offshore Fixed",
+            "asset_subtype": [
+                "Tripod"
+            ],
+            "country_code": "AO",
+            "stream": "down",
+            "color": "green"
+        },
+        {
+            "id": "1b92e1db-2cdb-41b5-90a2-56b8ccfe23c5",
+            "name": "Malongo Terminal",
+            "status": "In place",
+            "asset_category": "onshore_installation",
+            "asset_type": "Terminal",
+            "asset_subtype": [
+                "Crude"
+            ],
+            "country_code": "AO",
+            "stream": "down",
+            "color": "green"
+        },
+        {
+            "id": "29faff6c-9673-458e-b23f-3a799f442368",
+            "name": "Angola LNG",
+            "status": "In place",
+            "asset_category": "onshore_installation",
+            "asset_type": "Terminal",
+            "asset_subtype": [
+                "LNG"
+            ],
+            "country_code": "AO",
+            "stream": "down",
+            "color": "green"
+        }
+    ],
+    "links": [
+        {
+            "source": "9f63a81b-ca34-4043-ada9-dcf41cdfe445",
+            "label": "export_to - gas",
+            "target": "244c769f-7d7c-4179-a940-2d750540ac57"
+        },
+        {
+            "source": "244c769f-7d7c-4179-a940-2d750540ac57",
+            "label": "export_to - gas",
+            "target": "29faff6c-9673-458e-b23f-3a799f442368"
+        },
+        {
+            "source": "9f63a81b-ca34-4043-ada9-dcf41cdfe445",
+            "label": "export_to - oil",
+            "target": "36b7797f-31cb-472b-8378-05c30ab147c8"
+        },
+        {
+            "source": "b930f8a7-5577-4952-9f5c-2c9b66405534",
+            "label": "export_to - oil & gas",
+            "target": "9f63a81b-ca34-4043-ada9-dcf41cdfe445"
+        },
+        {
+            "source": "36b7797f-31cb-472b-8378-05c30ab147c8",
+            "label": "export_to - oil",
+            "target": "1b92e1db-2cdb-41b5-90a2-56b8ccfe23c5"
+        },
+        {
+            "source": "601163ec-70b9-444d-813c-51ff3e9f7be9",
+            "label": "export_to - oil & gas",
+            "target": "9f63a81b-ca34-4043-ada9-dcf41cdfe445"
+        },
+        {
+            "source": "ef5d48f8-9c0c-4a04-8050-68f939fe6f0f",
+            "label": "export_to - oil & gas",
+            "target": "9f63a81b-ca34-4043-ada9-dcf41cdfe445"
+        },
+        {
+            "source": "36b7797f-31cb-472b-8378-05c30ab147c8",
+            "label": "export_to - gas",
+            "target": "454ac9fc-a4c4-4f84-a14f-f1e520aa3fdb"
+        }
+    ],
+    "criticality": 33.33333333333333,
+    "coherence": 100
+}
+```
+
+This endpoint retrieves all the dependencies linked to an asset. The dependencies of an asset are organize as a [Directed Acyclic Graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph), this configuration is useful to detect weak nodes, or impacted assets in the case of a shutdown.
+
+
+### HTTP Request
+
+`GET https://app.allphins.com/api/v1/assets/:id/dag/`
+
+### URL Arguments
+
+Argument | Description
+--------- | -----------
+`id` | The ID of the initial asset
+
+### The DAG response
+
+The asset object contains both the generic fields and the category specific fields.
+
+**Attributes**
+
+Attribute | Type | Description
+--------- | ------- | -----------
+`node` | *list of objects* | List of nodes in the dag (Assets).
+`links` | *list of objects* | List of the connections between nodes.
+`criticality` | *float* | (For debug purpose) Weigth of the selected asset in the DAG.
+`coherence` | *float* | (For debug purpose) Consistency of the DAG (to be renamed `consistency` in the next release).
+
+**Node Object**
+
+Attribute | Type | Description
+--------- | ------- | -----------
+`id` | *string* | Unique identifier for the object.
+`name` | *string* | Asset name (usually the most popular).
+`status` | *string* | Status of the object (in place, planned or removed).
+`asset_category` | *string* | Major category of an asset.
+`asset_type` | *string* | Asset type.
+`asset_subtype` | *list of strings* | Subtype of an asset.
+`country_code` | *string* | Country code.
+`stream` | *string* | Is this node upstream or downstream of the selected asset.
+`color` | *string* | Node color for visualization.
+
+
+**Node Object**
+
+Attribute | Type | Description
+--------- | ------- | -----------
+`source` | *string* | Id of the source asset.
+`target` | *string* | Id of the target asset.
+`label` | *string* | Description of the connection.
