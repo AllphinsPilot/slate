@@ -1,13 +1,29 @@
 # Risks
 
+## Risk Object Attributes
+
+| Attribute          | Type        | Description                                  |
+| ------------------ | ----------- | -------------------------------------------- |
+| `id`               | _int_       | Unique identifier for the object.            |
+| `name`             | _string_    | Name of the risk.                            |
+| `start_date`       | _timestamp_ | Start date.                                  |
+| `end_date`         | _timestamp_ | End date.                                    |
+| `gross_exposure`   | _float_     | Gross Exposure in USD                        |
+| `portfolio_id`     | _string_    | ID of the [`portolio`](#portolios) object.   |
+| `portfolio_name`   | _string_    | Name of the [`portolio`](#portolios) object. |
+| `extra_fields`     | _json_      | Raw data from the risk import.               |
+| `assured_interest` | _float_     | Assured interest.                            |
+| `mute`             | _bool_      | Is the risk muted or not.                    |
+| `attributes`       | _list_      | List of attributes for this risk.            |
+
 ## Retrieve all risks
 
 ```shell
-curl 
+curl
   -d '{"filters": {}}'
   -X POST
   -H "Content-Type: application/json"
-  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  -H "Authorization: Token ENTERYOURAUTHTOKEN"
   https://app.allphins.com/api/v1/exposures/list_details/
 ```
 
@@ -15,15 +31,15 @@ curl
 
 ```json
 {
-  "count": 253133,
+  "count": 100000,
   "next": "https://app.allphins.com/api/v1/exposures/list_details/?page=2",
   "previous": null,
   "results": [
     {
-      "id": 6097763,
+      "id": 123456,
       "name": "Sleipner Complex",
-      "portfolio_id": "b8a75ca9-91fc-43d8-b729-b9c47921e246",
-      "portfolio_name": "Portfolio Name Example",
+      "portfolio_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee",
+      "portfolio_name": "Cedant A 2020",
       "extra_fields": null,
       "assured_interest": 1.0,
       "mute": false,
@@ -52,10 +68,7 @@ curl
         {
           "id": 5177,
           "label": "[1.907036, 58.366697]",
-          "value": [
-            1.907036,
-            58.366697
-          ],
+          "value": [1.907036, 58.366697],
           "type": "coordinates"
         },
         {
@@ -77,40 +90,28 @@ curl
           "type": "region"
         }
       ]
-    },
+    }
   ]
 }
 ```
 
-This endpoint retrieves all the risks. A risk is a object linking an asset (or a list of assets) and a list of policies (also named Heads of cover or interests). A risk belongs to a portfolio, which contains an `exposure_rules`. The `exposure_rules` allows the computation of the `company_exposure`.
-
+This endpoint retrieves all the risks, with a 30 items pagination.
 
 ### HTTP Request
 
 `POST https://app.allphins.com/api/v1/exposures/list_details/`
 
-### The risk object
+### URL Arguments
 
-#### Attributes
-
-Attribute | Type | Description
---------- | ------- | -----------
-`id` | *string* | Unique identifier for the object.
-`name` | *string* | Name of the risk.
-`assets` | *list of objects* | List of [`assets`](#assets) linked to this risk.
-`stats` | *object* | Simple statistics on the risk object.
-`policies` | *list of object* | List of policies (aka Heads of cover or Interests).
-`risks_count` | *integer* | Number of policies (will be renamed `interest_count` in the next release).
-`company_exposure` | *float* | Exposure on this asset computed with the `exposure_rules`.
-`exposure_rules` | *object* | Exposure rule inherited from the [`portolio`](#portolios) object.
-`portfolio` | *string* | ID of the [`portolio`](#portolios) object.
-
+| Argument | Description                          |
+| -------- | ------------------------------------ |
+| `filter` | Json object to filter the risk query |
 
 ## Retrieve a risk
 
 ```shell
 curl https://app.allphins.com/api/v1/exposures/7863/
-  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  -H "Authorization: Token ENTERYOURAUTHTOKEN"
 ```
 
 This endpoint retrieves a specific risk.
@@ -121,6 +122,6 @@ This endpoint retrieves a specific risk.
 
 ### URL Arguments
 
-Argument | Description
---------- | -----------
-`id` | The ID of the risk to retrieve
+| Argument | Description                    |
+| -------- | ------------------------------ |
+| `id`     | The ID of the risk to retrieve |

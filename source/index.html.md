@@ -10,7 +10,7 @@ toc_footers:
 includes:
   - portfolios
   - exposures
-  - companies
+  - scenarios
   - assets
   - errors
 
@@ -20,7 +20,7 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the Allphins API
 ---
 
 # Introduction
@@ -41,19 +41,18 @@ This API reference provides information on available endpoints and how to intera
 
 
 ```shell
-# With shell, you can just pass the correct header with each request
 curl https://app.allphins.com/api/v1/assets/
-  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  -H "Authorization: Token ENTERYOURAUTHTOKEN"
 ```
 
-> Make sure to replace `19a519fbcc3b5978f4d5a6405ca64d0344d274b6` with your API token.
+> Make sure to replace `ENTERYOURAUTHTOKEN` with your API token.
 
 Allphins uses API tokens to allow access to the API. You can register a new Allphins API token at our [developer portal](https://www.allphins.com/).
 
 Allphins expects for the API token to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6`
+`Authorization: Token ENTERYOURAUTHTOKEN`
 
 <aside class="notice">
-You must replace <code>19a519fbcc3b5978f4d5a6405ca64d0344d274b6</code> with your personal API key.
+You must replace <code>ENTERYOURAUTHTOKEN</code> with your personal API key.
 </aside>
