@@ -8,13 +8,10 @@ toc_footers:
   - <a href='https://www.allphins.com/'>Sign Up for a Developer Key</a>
 
 includes:
-  - assets
-  - companies
-  - countries
-  - flags
   - portfolios
   - exposures
-  - extract
+  - companies
+  - assets
   - errors
 
 search: true

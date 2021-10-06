@@ -1,103 +1,93 @@
-# Risks (ex-exposures)
+# Risks
 
 ## Retrieve all risks
 
 ```shell
-curl https://app.allphins.com/api/v1/exposures/
+curl 
+  -d '{"filters": {}}'
+  -X POST
+  -H "Content-Type: application/json"
   -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  https://app.allphins.com/api/v1/exposures/list_details/
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "count": 3276,
-    "next": "http://35.197.208.182/api/v1/exposures/?page=2",
-    "previous": null,
-    "results": [
+  "count": 253133,
+  "next": "https://app.allphins.com/api/v1/exposures/list_details/?page=2",
+  "previous": null,
+  "results": [
+    {
+      "id": 6097763,
+      "name": "Sleipner Complex",
+      "portfolio_id": "b8a75ca9-91fc-43d8-b729-b9c47921e246",
+      "portfolio_name": "Portfolio Name Example",
+      "extra_fields": null,
+      "assured_interest": 1.0,
+      "mute": false,
+      "gross_exposure": 100000000000.0,
+      "start_date": null,
+      "end_date": null,
+      "attributes": [
         {
-            "id": 7863,
-            "name": "Deepwater Frontier (Scrapped / Sold for Scrap)",
-            "assets": [
-                {
-                    "id": "4d767860-5f54-49cc-81be-7e1d4fe2ec0c",
-                    "rank": 1,
-                    "name": "Deepwater Frontier (Scrapped / Sold for Scrap)",
-                    "companies": [
-                        {
-                            "id": 220631,
-                            "name": "Transocean Ltd",
-                            "operating": false,
-                            "shares": 100,
-                            "asset": "4d767860-5f54-49cc-81be-7e1d4fe2ec0c",
-                            "company": "2c3060ce-f92d-4083-92a0-5a00040a809f"
-                        }
-                    ],
-                    "status": "In place",
-                    "asset_category": "offshore_mobile",
-                    "asset_type": "Offshore Rig",
-                    "asset_subtype": [
-                        "Drillship"
-                    ]
-                }
-            ],
-            "stats": {
-                "capex_sum": 0,
-                "raised_flags": 0
-            },
-            "policies": [
-                {
-                    "id": "145915be-fbf4-4dcc-8f25-68193f3dfd79",
-                    "name": "Deepwater Frontier (Scrapped / Sold for Scrap)",
-                    "slip_reference": "J1209K18CNWG",
-                    "policy": "TPL",
-                    "gross_exposure": 5374000,
-                    "policy_normalized": "tpl",
-                    "policy_type": "liability_type"
-                },
-                {
-                    "id": "2c702757-31f5-4700-bbe3-c73bb2a58c61",
-                    "name": "Deepwater Frontier (Scrapped / Sold for Scrap)",
-                    "slip_reference": "J1209K18DNWG",
-                    "policy": "TPL",
-                    "gross_exposure": 4375000,
-                    "policy_normalized": "tpl",
-                    "policy_type": "liability_type"
-                }
-            ],
-            "risks_count": 2,
-            "company_exposure": 3361401,
-            "exposure_rules": {
-                "layers": [
-                    {
-                        "shares": 0.2,
-                        "limit": 22500000,
-                        "excess": 7500000,
-                        "name": "Layer 1"
-                    },
-                    {
-                        "shares": 0.2,
-                        "limit": 30000000,
-                        "excess": 30000000,
-                        "name": "Layer 2"
-                    }
-                ]
-            },
-            "portfolio": "327aac44-8de0-4f49-9fbe-e0ece1dd2d3c"
+          "id": 1338,
+          "label": "Offshore Installation",
+          "value": "offshore_installation",
+          "type": "risk_category"
+        },
+        {
+          "id": 1647,
+          "label": "Norway",
+          "value": "NO",
+          "type": "country"
+        },
+        {
+          "id": 2608,
+          "label": "-96.0",
+          "value": -96.0,
+          "type": "elevation"
+        },
+        {
+          "id": 5177,
+          "label": "[1.907036, 58.366697]",
+          "value": [
+            1.907036,
+            58.366697
+          ],
+          "type": "coordinates"
+        },
+        {
+          "id": 156836,
+          "label": "Sleipner A",
+          "value": "589e508b-a184-4081-af94-2907b5d768c6",
+          "type": "asset"
+        },
+        {
+          "id": 156837,
+          "label": "Sleipner East Complex",
+          "value": "c8c57415-65d0-4308-814f-092dd75826f2",
+          "type": "asset_complex"
+        },
+        {
+          "id": 564105,
+          "label": "Europe",
+          "value": "europe",
+          "type": "region"
         }
-    ]
+      ]
+    },
+  ]
 }
 ```
 
-This endpoint retrieves all risks. A risk is a object linking an asset (or a list of assets) and a list of policies (also named Heads of cover or interests). A risk belongs to a portfolio, which contains an `exposure_rules`. The `exposure_rules` allows the computation of the `company_exposure`.
+This endpoint retrieves all the risks. A risk is a object linking an asset (or a list of assets) and a list of policies (also named Heads of cover or interests). A risk belongs to a portfolio, which contains an `exposure_rules`. The `exposure_rules` allows the computation of the `company_exposure`.
 
-<aside class="warning">
-    <code>asset_exposure</code> will be renamed <code>risk</code> in the next API release.
-</aside>
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/exposures/`
+`POST https://app.allphins.com/api/v1/exposures/list_details/`
 
 ### The risk object
 
