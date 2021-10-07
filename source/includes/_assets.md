@@ -1,8 +1,6 @@
 # Assets
 
-## The assets objects
-
-### Attributes
+## Asset Object Attributes
 
 Attribute | Type | Description
 --------- | ------- | -----------

@@ -110,7 +110,7 @@ This endpoint retrieves all the risks, with a 30 items pagination.
 ## Retrieve a risk
 
 ```shell
-curl https://app.allphins.com/api/v1/exposures/7863/
+curl https://app.allphins.com/api/v1/exposures/123456/
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
 ```
 

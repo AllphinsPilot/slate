@@ -154,3 +154,24 @@ curl https://app.allphins.com/api/v1/portfolios/aaaaaaaa-bbbb-cccc-dddd-eeeeeeee
 | Parameter | Description                         |
 | --------- | ----------------------------------- |
 | `id`      | The ID of the portfolio to retrieve |
+
+## Create a portfolio
+
+### HTTP Request
+
+`POST https://app.allphins.com/api/v1/portfolios/`
+
+### URL Parameters
+
+| Parameter         | Description                       |
+| ----------------- | --------------------------------- |
+| `name`            | Name of the portfolio             |
+| `portfolio_class` | Line of business of the portfolio |
+| `year_of_account` | Year of account                   |
+| `client`          | Client ID or name                 |
+
+## Edit a portfolio
+
+### HTTP Request
+
+`PATCH https://app.allphins.com/api/v1/portfolios/`

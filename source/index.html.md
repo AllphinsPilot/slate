@@ -9,6 +9,7 @@ toc_footers:
 
 includes:
   - portfolios
+  - structures
   - exposures
   - scenarios
   - assets
