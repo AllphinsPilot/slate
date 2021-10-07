@@ -71,7 +71,7 @@ No argument
 
 ```shell
 curl
-  -d '{portfolios: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", key_list: "01c5a5ff-0085-491a-bd4b-cec2c0700ce5"}'
+  -d '{portfolios: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", key_list: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee"}'
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
@@ -107,7 +107,7 @@ curl
 }
 ```
 
-This endpoint retrieves all the scenarios of a given scenario list, with the
+This endpoint retrieves all the scenarios of a given scenario list.
 
 ### HTTP Request
 
