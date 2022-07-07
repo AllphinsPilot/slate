@@ -30,7 +30,7 @@
 ## Retrieve all scenarios list
 
 ```shell
-curl https://app.allphins.com/api/v1/key_lists/
+curl https://app.allphins.com/api/v1/scenario_lists/
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
 ```
 
@@ -61,7 +61,7 @@ curl https://app.allphins.com/api/v1/key_lists/
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/key_lists/`
+`GET https://app.allphins.com/api/v1/scenario_lists/`
 
 ### URL Arguments
 
@@ -75,7 +75,7 @@ curl
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
-  https://app.allphins.com/api/v1/clash_scenarios/scenarios_list/
+  https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/
 ```
 
 ```json
@@ -111,11 +111,11 @@ This endpoint retrieves all the scenarios of a given scenario list.
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/clash_scenarios/scenarios_list/`
+`POST https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/`
 
 ### URL Arguments
 
 | Argument     | Description                                      |
 | ------------ | ------------------------------------------------ |
-| `key_list`   | The ID of the sceanrio list                      |
-| `portfolios` | The IDs of the [`portolio`](#portolios) objects. |
+| `key_list`   | The ID of the scenario list                      |
+| `portfolios` | The IDs of the [`portfolio`](#portfolios) objects. |
