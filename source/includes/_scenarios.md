@@ -81,7 +81,7 @@ curl
 ```json
 {
   "count": 132,
-  "next": "http://localhost/api/v1/clash_scenarios/scenarios_list/?page=2",
+  "next": "http://localhost/api/v1/clash_scenarios/scenario_lists/?page=2",
   "previous": null,
   "results": [
     {

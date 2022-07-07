@@ -8,7 +8,7 @@ A structure is a insurance or reinssurance policy. It's dependent of a portfolio
 | ----------------- | ---------- | -------------------------------------------------------------- |
 | `id`              | _int_      | Unique identifier for the object.                              |
 | `type`            | _string_   | Policy type: `direct`, `excess_of_loss` or `quota_share`.      |
-| `portfolio`       | _string_   | ID of the [`portolio`](#portolios) object.                     |
+| `portfolio`       | _string_   | ID of the [`portfolio`](#portfolios) object.                     |
 | `premium_100`     | _float_    | Premium at 100% share.                                         |
 | `benefit_from`    | _list_     | List of benefiting policies.                                   |
 | `limit`           | _float_    | Policy limit.                                                  |
@@ -28,7 +28,7 @@ A structure is a insurance or reinssurance policy. It's dependent of a portfolio
 ## Retrieve all policies
 
 ```shell
-curl https://app.allphins.com/api/v1/structures/
+curl https://app.allphins.com/api/v1/policies/
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
 ```
 
@@ -64,7 +64,7 @@ curl https://app.allphins.com/api/v1/structures/
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/structures/`
+`GET https://app.allphins.com/api/v1/policies/`
 
 ### URL Arguments
 
@@ -73,7 +73,7 @@ No argument
 ## Retrieve a policy
 
 ```shell
-curl https://app.allphins.com/api/v1/structures/123456/
+curl https://app.allphins.com/api/v1/policies/123456/
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
 ```
 
@@ -81,7 +81,7 @@ This endpoint retrieves a single policy.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/structures/:id/`
+`GET https://app.allphins.com/api/v1/policies/:id/`
 
 ### URL Arguments
 
@@ -116,18 +116,18 @@ curl
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
-  https://app.allphins.com/api/v1/structures/
+  https://app.allphins.com/api/v1/policies/
 ```
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/structures/`
+`POST https://app.allphins.com/api/v1/policies/`
 
 ## Edit a policy
 
 ### HTTP Request
 
-`PATCH https://app.allphins.com/api/v1/structures/:id/`
+`PATCH https://app.allphins.com/api/v1/policies/:id/`
 
 ### URL Arguments
 
