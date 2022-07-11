@@ -24,7 +24,7 @@ curl
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
-  https://app.allphins.com/api/v1/exposures/list_details/
+  https://app.allphins.com/api/v1/risks/list_details/
 ```
 
 > The above command returns JSON structured like this:
@@ -32,7 +32,7 @@ curl
 ```json
 {
   "count": 100000,
-  "next": "https://app.allphins.com/api/v1/exposures/list_details/?page=2",
+  "next": "https://app.allphins.com/api/v1/risks/list_details/?page=2",
   "previous": null,
   "results": [
     {
@@ -99,7 +99,7 @@ This endpoint retrieves all the risks, with a 30 items pagination.
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/exposures/list_details/`
+`POST https://app.allphins.com/api/v1/risks/list_details/`
 
 ### URL Arguments
 
@@ -110,7 +110,7 @@ This endpoint retrieves all the risks, with a 30 items pagination.
 ## Retrieve a risk
 
 ```shell
-curl https://app.allphins.com/api/v1/exposures/123456/
+curl https://app.allphins.com/api/v1/risks/123456/
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
 ```
 
@@ -118,7 +118,7 @@ This endpoint retrieves a specific risk.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/exposures/:id/`
+`GET https://app.allphins.com/api/v1/risks/:id/`
 
 ### URL Arguments
 

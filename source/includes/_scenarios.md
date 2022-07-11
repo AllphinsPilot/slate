@@ -111,7 +111,7 @@ This endpoint retrieves all the scenarios of a given scenario list.
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/`
+`POST https://app.allphins.com/api/v1/clash_scenarios/scenarios_list/`
 
 ### URL Arguments
 
