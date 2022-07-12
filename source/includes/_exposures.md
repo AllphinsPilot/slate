@@ -2,19 +2,19 @@
 
 ## Risk Object Attributes
 
-| Attribute          | Type        | Description                                  |
-| ------------------ | ----------- | -------------------------------------------- |
-| `id`               | _int_       | Unique identifier for the object.            |
-| `name`             | _string_    | Name of the risk.                            |
-| `start_date`       | _timestamp_ | Start date.                                  |
-| `end_date`         | _timestamp_ | End date.                                    |
-| `gross_exposure`   | _float_     | Gross Exposure in USD                        |
-| `portfolio_id`     | _string_    | ID of the [`portolio`](#portolios) object.   |
-| `portfolio_name`   | _string_    | Name of the [`portolio`](#portolios) object. |
-| `extra_fields`     | _json_      | Raw data from the risk import.               |
-| `assured_interest` | _float_     | Assured interest.                            |
-| `mute`             | _bool_      | Is the risk muted or not.                    |
-| `attributes`       | _list_      | List of attributes for this risk.            |
+| Attribute          | Type        | Description                                    |
+| ------------------ | ----------- | ---------------------------------------------- |
+| `id`               | _int_       | Unique identifier for the object.              |
+| `name`             | _string_    | Name of the risk.                              |
+| `start_date`       | _timestamp_ | Start date.                                    |
+| `end_date`         | _timestamp_ | End date.                                      |
+| `gross_exposure`   | _float_     | Gross Exposure in USD                          |
+| `portfolio_id`     | _string_    | ID of the [`portfolio`](#portfolios) object.   |
+| `portfolio_name`   | _string_    | Name of the [`portfolio`](#portfolios) object. |
+| `extra_fields`     | _json_      | Raw data from the risk import.                 |
+| `assured_interest` | _float_     | Assured interest.                              |
+| `mute`             | _bool_      | Is the risk muted or not.                      |
+| `attributes`       | _list_      | List of attributes for this risk.              |
 
 ## Retrieve all risks
 

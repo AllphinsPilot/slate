@@ -11,19 +11,17 @@ The portfolio object links policies to a list of risks. It belongs to a client a
 | `created_at`       | _timestamp_ | Creation date.                                                                                                                     |
 | `updated_at`       | _timestamp_ | Last update date.                                                                                                                  |
 | `status`           | _integer_   | Processing status of the portfolio (-1: `error`, 1: `unprocessed`, 2: `loading`, 3: `processing`, 3: `enriching`, 4: `processed`). |
+| `transaction`      | _string_   | Type of transaction: `pre_inward`, `inward`, `selfward`, `outward`.                  |
 | `renewal_date`     | _string_    | Next renewal date.                                                                                                                 |
 | `premium`          | _int_       | Premium in USD.                                                                                                                    |
-| `risks_count`      | _int_       | Number of risks in the portfolio.                                                                                                  |
-| `max_exposure`     | _float_     | Maximum exposure on the portfolio (based on entered structures).                                                                   |
-| `structures`       | _list_      | List of policies                                                                                                                   |
+| `max_exposure`     | _float_     | Maximum exposure on the portfolio (based on enterd policies).                                                                   |
 | `client`           | _int_       | ID of the client.                                                                                                                  |
 | `client_name`      | _string_    | Name of the client                                                                                                                 |
 | `timeline`         | _string_    | Status of the portofolio (expired, active, etc...)                                                                                 |
 | `renewal`          | _string_    | ID of the next portfolio.                                                                                                          |
 | `portfolio_class`  | _string_    | Line of business of the portfolio.                                                                                                 |
 | `year_of_account`  | _int_       | Year of account.                                                                                                                   |
-| `match_percentage` | _float_     | Percentage of enriched risks.                                                                                                      |
-| `sov_files`        | _list_      | List of all the Schedules of Values entered, with the corresponding configuration.                                                 |
+| `file`             | _list_      | List of all the Schedules of Values entered, with the corresponding configuration.                                                 |
 
 ## Retrieve all portfolios
 
@@ -75,11 +73,11 @@ curl https://app.allphins.com/api/v1/portfolios/
 
 | Parameter | Description                                                                                                                     |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `label`   | Shortcut to retreive all actives portfolio, set label to 'in_force' (https://app.allphins.com/api/v1/portfolios?label=in_force) |
+| `label`   | Shortcut to retreive all actives portfolios, set label to 'in_force' (https://app.allphins.com/api/v1/portfolios?label=in_force) |
 
 ## Retrieve a portfolio
 
-This endpoint retrieves a specific portfolio. More fields are available throudh this endpoint.
+This endpoint retrieves a specific portfolio. More fields are available through this endpoint.
 
 ```shell
 curl https://app.allphins.com/api/v1/portfolios/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee/

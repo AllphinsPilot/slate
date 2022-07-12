@@ -17,7 +17,7 @@ Attribute | Type | Description
 `news` | *list of objects* | List of news concerning the asset.
 `linked_assets` | *list of objects* | List of assets dependencies.
 `indicators` | *object* | Simple statistics on the asset.
-`location` | *list of objects* | List of lcoations.
+`location` | *list of objects* | List of locations.
 `installation_date` | *integer* | Installation year.
 `installation_date_normalized` | *timestamp* | Installation date.
 `general_comment` | *string* | Comment on the asset.
@@ -29,7 +29,7 @@ Attribute | Type | Description
 
 **Specific Attributes**
 
-Specific attributes depend of the asset category, here is a list of the possible categories:
+Specific attributes depend on the asset category, here is a list of the possible categories:
 
 * Offshore Installation
 * Onshore Installation
@@ -38,7 +38,7 @@ Specific attributes depend of the asset category, here is a list of the possible
 * Renewable
 * Unknown
 
-Every category has it's own attributes.
+Every category has its own attributes.
 
 ## Retrieve all assets
 
@@ -178,7 +178,7 @@ curl https://app.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
 
 This endpoint retrieves a specific asset.
 
-<aside class="warning">Every asset type has its own attributes, for example a <code>offshore_installation</code> have a <code>water_depth</code> but a <code>onshore_installation</code> doesn't.</aside>
+<aside class="warning">Every asset type has its own attributes, for example an <code>offshore_installation</code> has a <code>water_depth</code> but a <code>onshore_installation</code> doesn't.</aside>
 
 ### HTTP Request
 

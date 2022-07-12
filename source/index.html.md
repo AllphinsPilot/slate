@@ -9,7 +9,7 @@ toc_footers:
 
 includes:
   - portfolios
-  - structures
+  - policies
   - exposures
   - scenarios
   - assets
