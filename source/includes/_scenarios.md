@@ -118,7 +118,13 @@ This endpoint retrieves all the scenarios of a given scenario list.
 
 ### URL Arguments
 
-| Argument     | Description                                      |
-| ------------ | ------------------------------------------------ |
-| `key_list`   | The ID of the scenario list                      |
-| `portfolios` | The IDs of the [`portfolio`](#portfolios) objects. |
+| Argument     | Type       | Description                                      |
+| ------------ | ---------  | ------------------------------------------------ |
+| `page` | _integer_ | Page number (each page contains 30 scenarios). |
+| `key_list`   | _string_ | The ID of the scenario list. |
+| `portfolios` | _list_ | The IDs of the [`portfolio`](#portfolios) objects. |
+| `policy_status` | _list_ | The statuses of the policies from the following possibilities: `written`, `quote`. |
+| `policy_type` | _list_ | The types of the policies from the following possibilities :  `excess_of_loss`, `quota_share`, `direct`. |
+| `tags` | _list_ | Considering the policies with specified tags. |
+| `date` | _string_ | Considering the policies in force at the relevant dates (format : `YYYY-MM-DD` or `today`). |
+| `computation_date` | _string_ | Date considered for the calculation of the aggregation (format : `YYYY-MM-DD` or `today`). |
