@@ -74,11 +74,20 @@ No argument
 
 ```shell
 curl
-  -d '{portfolios: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", key_list: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee"}'
+  -d '{"portfolios": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", "key_list": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee"}'
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Token ENTERYOURAUTHTOKEN"
   https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/
+
+# retrieve the cedant aggregation with the "transaction"= "cedant" parameter
+curl
+  -d '{"portfolios": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", "key_list": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", "transaction": "cedant"}'
+  -X POST
+  -H "Content-Type: application/json"
+  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/
+
 ```
 
 ```json
@@ -112,6 +121,9 @@ curl
 
 This endpoint retrieves all the scenarios of a given scenario list.
 
+<aside class="notice">You can retrieve the cedant aggregation of your portfolio by adding the <code>"transaction": "cedant"</code> parameter.</aside>
+
+
 ### HTTP Request
 
 `POST https://app.allphins.com/api/v1/clash_scenarios/scenarios_list/`
@@ -128,3 +140,4 @@ This endpoint retrieves all the scenarios of a given scenario list.
 | `tags` | _list_ | Considering the policies with specified tags. |
 | `date` | _string_ | Considering the policies in force at the relevant dates (format : `YYYY-MM-DD` or `today`). |
 | `computation_date` | _string_ | Date considered for the calculation of the aggregation (format : `YYYY-MM-DD` or `today`). |
+| `transaction` | _string_ | 'cedant' or null, cedant is used to retreive cedant aggregation |
