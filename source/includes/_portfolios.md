@@ -4,24 +4,51 @@ The portfolio object links policies to a list of risks. It belongs to a client a
 
 ## Portfolio Object Attributes
 
-| Attribute          | Type        | Description                                                                                                                        |
-| ------------------ | ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `id`               | _UUID_      | Unique identifier for the object.                                                                                                  |
-| `name`             | _string_    | Name of the portfolio.                                                                                                             |
-| `created_at`       | _timestamp_ | Creation date.                                                                                                                     |
-| `updated_at`       | _timestamp_ | Last update date.                                                                                                                  |
-| `status`           | _integer_   | Processing status of the portfolio (-1: `error`, 1: `unprocessed`, 2: `loading`, 3: `processing`, 3: `enriching`, 4: `processed`). |
-| `transaction`      | _string_   | Type of transaction: `pre_inward`, `inward`, `selfward`, `outward`.                  |
-| `renewal_date`     | _string_    | Next renewal date.                                                                                                                 |
-| `premium`          | _int_       | Premium in USD.                                                                                                                    |
-| `max_exposure`     | _float_     | Maximum exposure on the portfolio (based on enterd policies).                                                                   |
-| `client`           | _int_       | ID of the client.                                                                                                                  |
-| `client_name`      | _string_    | Name of the client                                                                                                                 |
-| `timeline`         | _string_    | Status of the portofolio (expired, active, etc...)                                                                                 |
-| `renewal`          | _string_    | ID of the next portfolio.                                                                                                          |
-| `portfolio_class`  | _string_    | Line of business of the portfolio.                                                                                                 |
-| `year_of_account`  | _int_       | Year of account.                                                                                                                   |
-| `file`             | _list_      | List of all the Schedules of Values entered, with the corresponding configuration.                                                 |
+| Attribute       | Type                                                                    | Description                                                                                                                                                                                                                                                           |
+|-----------------|-------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`            | _UUID_                                                                  | Unique identifier for the object.                                                                                                                                                                                                                                     |
+| `name`          | _string_                                                                | Name of the portfolio.                                                                                                                                                                                                                                                |
+| `created_at`    | _timestamp_                                                             | Creation date.                                                                                                                                                                                                                                                        |
+| `updated_at`    | _timestamp_                                                             | Last update date.                                                                                                                                                                                                                                                     |
+| `transaction`   | _string_                                                                | Type of transaction: `pre_inward`, `inward`, `selfward`, `outward`.                                                                                                                                                                                                   |
+| `renewal_date`  | _string_                                                                | Next renewal date.                                                                                                                                                                                                                                                    |
+| `premium`       | _int_                                                                   | Premium in USD.                                                                                                                                                                                                                                                       |
+| `max_exposure`  | _float_                                                                 | Maximum exposure on the portfolio (based on enterd policies).                                                                                                                                                                                                         |
+| `client`        | _int_                                                                   | ID of the client.                                                                                                                                                                                                                                                     |
+| `client_name`   | _string_                                                                | Name of the client                                                                                                                                                                                                                                                    |
+| `timeline`      | _string_                                                                | Status of the portofolio (expired, active, etc...)                                                                                                                                                                                                                    |
+| `renewal`       | _string_                                                                | ID of the next portfolio.                                                                                                                                                                                                                                             |
+| `portfolio_class` | _string_                                                                | Line of business of the portfolio.                                                                                                                                                                                                                                    |
+| `year_of_account` | _int_                                                                   | Year of account.                                                                                                                                                                                                                                                      |
+| `datasources`   | _list[dict]_                                                            | List of all uploaded datasources.                                                                                                                                                                                                                                     |
+|     | _id_ <br/>_status_<br/>_original_filename_                              | UUID of the datasource<br/>Status of the datasource<br/>Original filename of the datasource                                                                                                                                                                           |
+| `policies`      | _list[dict]_                                                            | List of the policies.                                                                                                                                                                                                              |
+|        | _id_<br/>_name_<br/>_type_<br/>_start_date_<br/>_end_date_<br/>_status_ | Id of the policy.<br/>Name of the policy.<br/>Type of the policy (`quota_share`, `excess_of_loss`, `direct`)<br/>Start date of the policy<br/>End date of the policy<br/>Status of the policy (`quote`, `written`, `expired`, `declined`, `not_taken_up`, `work_in_progress`, `deleted`) |
+
+
+## Create a portfolio
+
+### HTTP Request
+
+`POST https://app.allphins.com/api/v1/portfolios/`
+
+### Payload
+
+| Parameter         | Type | Description                             |
+| ----------------- |-------|-----------------------------------------|
+| `name`            | _str_ | Name of the portfolio                   |
+| `portfolio_class` | _str_ | Line of business of the portfolio       |
+| `year_of_account` | _int_ | Year of account                         |
+| `client`          | _int_ | Client ID                               |
+| `transaction`     | _str_ | Type of transaction (`inward` or `outward`) |
+
+```shell
+curl https://app.allphins.com/api/v1/portfolios/ \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  --data-raw '{"name":"nouveau client 2028","portfolio_class":"cyber","transaction":"inward","year_of_account":2026,"client":1234}'
+  ````
 
 ## Retrieve all portfolios
 
@@ -29,39 +56,63 @@ This endpoint retrieves all portfolios of a given user. This will also return po
 
 ```shell
 curl https://app.allphins.com/api/v1/portfolios/
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 [
-    {
-        "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee",
-        "name": "Cedant A 2020",
-        "status": 1,
-        "created_at": "2020-10-16T17:20:42.697620",
-        "updated_at": "2021-09-27T15:42:11.425037",
-        "renewal_date": "2019-12-30T00:00:00",
-        "premium": 1000000,
-        "risks_count": 1000,
-        "max_exposure": 10000000,
-        "structures": [
-            {
-                "id": 1,
-                "type": "quota_share",
-                "start_date": "2018-12-31T00:00:00",
-                "end_date": "2019-12-30T00:00:00",
-                "status": "written"
-            }
-        ],
-        "client": 1,
-        "client_name": "Client A",
-        "timeline": "Expired",
-        "renewal": null,
-        "portfolio_class": "energy",
-        "year_of_account": null
-    }
+  {
+    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "name": "Cyber Client 1 2024",
+    "created_at": "2024-05-20T07:52:55.491729Z",
+    "updated_at": "2024-05-23T14:31:10.591036Z",
+    "renewal_date": "2024-12-31T00:00:00Z",
+    "premium": 9500,
+    "max_exposure": 190000,
+    "policies": [
+      {
+        "id": 1234,
+        "name": "Policy 1",
+        "type": "excess_of_loss",
+        "start_date": "2023-01-01",
+        "end_date": "2025-05-19",
+        "status": "quote"
+      },
+      {
+        "id": 1235,
+        "name": "Policy 2",
+        "type": "excess_of_loss",
+        "start_date": "2024-01-01",
+        "end_date": "2024-12-31",
+        "status": "written"
+      },
+      {
+        "id": 1236,
+        "name": "Policy 3",
+        "type": "",
+        "start_date": null,
+        "end_date": null,
+        "status": "quote"
+      }
+    ],
+    "client": 1,
+    "client_name": "Cyber Client 1",
+    "timeline": "Active",
+    "renewal": null,
+    "portfolio_class": "cyber",
+    "year_of_account": 2024,
+    "transaction": "inward",
+    "datasources": [
+      {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "status": "Ready",
+        "original_filename": "Risk_list.xlsx"
+      }
+    ],
+    "main_datasource_status": "Ready"
+  }
 ]
 ```
 
@@ -71,75 +122,71 @@ curl https://app.allphins.com/api/v1/portfolios/
 
 ### URL Parameters
 
-| Parameter | Description                                                                                                                     |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `label`   | Shortcut to retreive all actives portfolios, set label to 'in_force' (https://app.allphins.com/api/v1/portfolios?label=in_force) |
+| Parameter | Description                                                                                                                      |
+| --------- |----------------------------------------------------------------------------------------------------------------------------------|
+| `label`   | Shortcut to retreive all actives portfolios, set label to 'in_force' (https://api.allphins.com/api/v1/portfolios?label=in_force) |
 
 ## Retrieve a portfolio
 
 This endpoint retrieves a specific portfolio. More fields are available through this endpoint.
 
 ```shell
-curl https://app.allphins.com/api/v1/portfolios/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee/
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+curl https://app.allphins.com/api/v1/portfolios/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/
+  -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee",
-    "name": "Cedant A 2020",
-    "status": 1,
-    "premium": 10000,
-    "match_percentage": 0.99,
-    "max_exposure": 10000000,
-    "risks_count": 1000,
-    "created_at": "2020-10-16T17:20:42.697620",
-    "updated_at": "2021-09-27T15:42:11.425037",
-    "structures": [
-        {
-            "description": null,
-            "end_date": "2019-12-30T00:00:00",
-            "excess_currency": "USD",
-            "excess": null,
-            "id": 123,
-            "limit_currency": "USD",
-            "limit": null,
-            "portfolio": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee",
-            "premium_100": 100000,
-            "reference": null,
-            "reinstatement": null,
-            "risk_attached": false,
-            "share": 0.01358,
-            "start_date": "2018-12-31T00:00:00",
-            "status": "written",
-            "tags": ["Station F"],
-            "type": "quota_share",
-            "benefits": [],
-            "client_id": 1,
-            "client_name": "Client A",
-            "portfolio_name": "Cedant A 2020"
-        }
-    ],
-    "legacy": null,
-    "renewal": null,
-    "client": 1,
-    "client_name": "Client A",
-    "timeline": "Expired",
-    "portfolio_type": "direct",
-    "sov_files": [
-        {
-            "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee",
-            "file": "https://secret-url-to-file",
-            "config": {},
-            "status": "Processed",
-            "created_at": "2021-03-05T20:27:07.065600",
-            "updated_at": "2021-03-05T20:27:07.065608"
-        }
-    ],
-    "portfolio_class": "energy",
-    "year_of_account": null
+  "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "name": "Cyber Client 1 2024",
+  "created_at": "2024-05-20T07:52:55.491729Z",
+  "updated_at": "2024-05-23T14:31:10.591036Z",
+  "renewal_date": "2024-12-31T00:00:00Z",
+  "premium": 9500,
+  "max_exposure": 190000,
+  "policies": [
+    {
+      "id": 1234,
+      "name": "Policy 1",
+      "type": "excess_of_loss",
+      "start_date": "2023-01-01",
+      "end_date": "2025-05-19",
+      "status": "quote"
+    },
+    {
+      "id": 1235,
+      "name": "Policy 2",
+      "type": "excess_of_loss",
+      "start_date": "2024-01-01",
+      "end_date": "2024-12-31",
+      "status": "written"
+    },
+    {
+      "id": 1236,
+      "name": "Policy 3",
+      "type": "",
+      "start_date": null,
+      "end_date": null,
+      "status": "quote"
+    }
+  ],
+  "client": 1,
+  "client_name": "Cyber Client 1",
+  "timeline": "Active",
+  "renewal": null,
+  "portfolio_class": "cyber",
+  "year_of_account": 2024,
+  "transaction": "inward",
+  "datasources": [
+    {
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "status": "Ready",
+      "original_filename": "Risk_list.xlsx"
+    }
+  ],
+  "main_datasource_status": "Ready"
 }
 ```
 
@@ -152,24 +199,3 @@ curl https://app.allphins.com/api/v1/portfolios/aaaaaaaa-bbbb-cccc-dddd-eeeeeeee
 | Parameter | Description                         |
 | --------- | ----------------------------------- |
 | `id`      | The ID of the portfolio to retrieve |
-
-## Create a portfolio
-
-### HTTP Request
-
-`POST https://app.allphins.com/api/v1/portfolios/`
-
-### URL Parameters
-
-| Parameter         | Description                       |
-| ----------------- | --------------------------------- |
-| `name`            | Name of the portfolio             |
-| `portfolio_class` | Line of business of the portfolio |
-| `year_of_account` | Year of account                   |
-| `client`          | Client ID or name                 |
-
-## Edit a portfolio
-
-### HTTP Request
-
-`PATCH https://app.allphins.com/api/v1/portfolios/`

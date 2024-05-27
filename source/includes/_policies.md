@@ -32,7 +32,7 @@ A policy is an insurance or reinssurance policy. It's dependent of a portfolio (
 
 ```shell
 curl https://app.allphins.com/api/v1/policies/
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 > The above command returns JSON structured like this:
@@ -77,7 +77,7 @@ No argument
 
 ```shell
 curl https://app.allphins.com/api/v1/policies/123456/
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 This endpoint retrieves a single policy.
@@ -118,7 +118,7 @@ curl
   }'
   -X POST
   -H "Content-Type: application/json"
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
   https://app.allphins.com/api/v1/policies/
 ```
 

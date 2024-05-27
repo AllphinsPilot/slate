@@ -4,7 +4,7 @@
 
 ```shell
 curl https://app.allphins.com/api/v1/flags/
-  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 > The above command returns JSON structured like this:
@@ -244,7 +244,7 @@ Attribute | Type | Description
 
 ```shell
 curl https://app.allphins.com/api/v1/flags/29647993-4153-4b0e-bbd5-c9239cf79ad5/
-  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 > The above command returns JSON structured like this:

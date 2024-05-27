@@ -44,7 +44,7 @@ Every category has its own attributes.
 
 ```shell
 curl https://app.allphins.com/api/v1/assets/
-  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 > The above command returns JSON structured like this:
@@ -100,7 +100,7 @@ Argument | Default | Description
 
 ```shell
 curl https://app.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
-  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 > The above command returns JSON structured like this:

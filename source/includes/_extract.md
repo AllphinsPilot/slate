@@ -7,7 +7,7 @@ curl
   -d '{"text":"Pelican FPSO in Gabon is redeployed."}'
   -X POST
   -H "Content-Type: application/json"
-  -H "Authorization: Token 19a519fbcc3b5978f4d5a6405ca64d0344d274b6"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
   https://app.allphins.com/api/v1/countries/
 ```
 

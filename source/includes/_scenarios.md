@@ -34,7 +34,7 @@
 
 ```shell
 curl https://app.allphins.com/api/v1/scenario_lists/
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 > The above command returns JSON structured like this:
@@ -77,7 +77,7 @@ curl
   -d '{"portfolios": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", "key_list": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee"}'
   -X POST
   -H "Content-Type: application/json"
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
   https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/
 
 # retrieve the cedant aggregation with the "transaction"= "cedant" parameter
@@ -85,7 +85,7 @@ curl
   -d '{"portfolios": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", "key_list": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeee", "transaction": "cedant"}'
   -X POST
   -H "Content-Type: application/json"
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
   https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/
 
 ```

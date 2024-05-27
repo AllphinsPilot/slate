@@ -23,7 +23,7 @@ curl
   -d '{"filters": {}}'
   -X POST
   -H "Content-Type: application/json"
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
   https://app.allphins.com/api/v1/risks/list_details/
 ```
 
@@ -111,7 +111,7 @@ This endpoint retrieves all the risks, with a 30 items pagination.
 
 ```shell
 curl https://app.allphins.com/api/v1/risks/123456/
-  -H "Authorization: Token ENTERYOURAUTHTOKEN"
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 This endpoint retrieves a specific risk.
