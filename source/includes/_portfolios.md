@@ -47,7 +47,7 @@ curl https://api.allphins.com/api/v1/portfolios/ \
   -X POST \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
-  --data-raw '{"name":"nouveau client 2028","portfolio_class":"cyber","transaction":"inward","year_of_account":2026,"client":1234}'
+  -d '{"name":"Client A 2024","portfolio_class":"cyber","transaction":"inward","year_of_account":2024,"client":1234}'
   ````
 
 ## Retrieve all portfolios
