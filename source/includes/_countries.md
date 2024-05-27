@@ -3,7 +3,7 @@
 ## Retrieve all countries
 
 ```shell
-curl https://app.allphins.com/api/v1/countries/
+curl https://api.allphins.com/api/v1/countries/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -44,7 +44,7 @@ This endpoint retrieves all countries.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/countries/`
+`GET https://api.allphins.com/api/v1/countries/`
 
 ### Query Arguments
 
@@ -72,7 +72,7 @@ Attribute | Type | Description
 ## Retrieve a country
 
 ```shell
-curl https://app.allphins.com/api/v1/countries/064f9fad-24bd-4091-a782-9bba124cdff2/
+curl https://api.allphins.com/api/v1/countries/064f9fad-24bd-4091-a782-9bba124cdff2/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -103,7 +103,7 @@ This endpoint retrieves a specific country.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/countries/:id/`
+`GET https://api.allphins.com/api/v1/countries/:id/`
 
 ### URL Arguments
 

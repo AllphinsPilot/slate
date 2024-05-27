@@ -30,7 +30,7 @@ The portfolio object links policies to a list of risks. It belongs to a client a
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/portfolios/`
+`POST https://api.allphins.com/api/v1/portfolios/`
 
 ### Payload
 
@@ -43,7 +43,7 @@ The portfolio object links policies to a list of risks. It belongs to a client a
 | `transaction`     | _str_ | Type of transaction (`inward` or `outward`) |
 
 ```shell
-curl https://app.allphins.com/api/v1/portfolios/ \
+curl https://api.allphins.com/api/v1/portfolios/ \
   -X POST \
   -H 'Content-Type: application/json' \
   -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
@@ -55,7 +55,7 @@ curl https://app.allphins.com/api/v1/portfolios/ \
 This endpoint retrieves all portfolios of a given user. This will also return portfolios shared by other users with the current user.
 
 ```shell
-curl https://app.allphins.com/api/v1/portfolios/
+curl https://api.allphins.com/api/v1/portfolios/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -118,7 +118,7 @@ curl https://app.allphins.com/api/v1/portfolios/
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/portfolios/`
+`GET https://api.allphins.com/api/v1/portfolios/`
 
 ### URL Parameters
 
@@ -131,7 +131,7 @@ curl https://app.allphins.com/api/v1/portfolios/
 This endpoint retrieves a specific portfolio. More fields are available through this endpoint.
 
 ```shell
-curl https://app.allphins.com/api/v1/portfolios/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/
+curl https://api.allphins.com/api/v1/portfolios/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/
   -H 'Authorization: Bearer YOUR_ACCESS_TOKEN'
 ```
 
@@ -192,7 +192,7 @@ curl https://app.allphins.com/api/v1/portfolios/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/portfolios/:id/`
+`GET https://api.allphins.com/api/v1/portfolios/:id/`
 
 ### URL Parameters
 

@@ -3,7 +3,7 @@
 ## Retrieve all companies
 
 ```shell
-curl https://app.allphins.com/api/v1/companies/
+curl https://api.allphins.com/api/v1/companies/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -109,7 +109,7 @@ This endpoint retrieves all companies.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/companies/`
+`GET https://api.allphins.com/api/v1/companies/`
 
 ### Query Arguments
 
@@ -144,7 +144,7 @@ Attribute | Type | Description
 ## Retrieve a company
 
 ```shell
-curl https://app.allphins.com/api/v1/companies/bc687fa2-1781-418d-8316-8f2cec9a3759/
+curl https://api.allphins.com/api/v1/companies/bc687fa2-1781-418d-8316-8f2cec9a3759/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -176,7 +176,7 @@ This endpoint retrieves a specific company.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/companies/:id/`
+`GET https://api.allphins.com/api/v1/companies/:id/`
 
 ### URL Arguments
 

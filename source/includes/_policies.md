@@ -31,7 +31,7 @@ A policy is an insurance or reinssurance policy. It's dependent of a portfolio (
 ## Retrieve all policies
 
 ```shell
-curl https://app.allphins.com/api/v1/policies/
+curl https://api.allphins.com/api/v1/policies/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -67,7 +67,7 @@ curl https://app.allphins.com/api/v1/policies/
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/policies/`
+`GET https://api.allphins.com/api/v1/policies/`
 
 ### URL Arguments
 
@@ -76,7 +76,7 @@ No argument
 ## Retrieve a policy
 
 ```shell
-curl https://app.allphins.com/api/v1/policies/123456/
+curl https://api.allphins.com/api/v1/policies/123456/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -84,7 +84,7 @@ This endpoint retrieves a single policy.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/policies/:id/`
+`GET https://api.allphins.com/api/v1/policies/:id/`
 
 ### URL Arguments
 
@@ -119,18 +119,18 @@ curl
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-  https://app.allphins.com/api/v1/policies/
+  https://api.allphins.com/api/v1/policies/
 ```
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/policies/`
+`POST https://api.allphins.com/api/v1/policies/`
 
 ## Edit a policy
 
 ### HTTP Request
 
-`PATCH https://app.allphins.com/api/v1/policies/:id/`
+`PATCH https://api.allphins.com/api/v1/policies/:id/`
 
 ### URL Arguments
 

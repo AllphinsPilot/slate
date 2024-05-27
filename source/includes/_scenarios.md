@@ -33,7 +33,7 @@
 ## Retrieve all scenarios list
 
 ```shell
-curl https://app.allphins.com/api/v1/scenario_lists/
+curl https://api.allphins.com/api/v1/scenario_lists/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -64,7 +64,7 @@ curl https://app.allphins.com/api/v1/scenario_lists/
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/scenario_lists/`
+`GET https://api.allphins.com/api/v1/scenario_lists/`
 
 ### URL Arguments
 
@@ -78,7 +78,7 @@ curl
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-  https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/
+  https://api.allphins.com/api/v1/clash_scenarios/scenario_lists/
 
 # retrieve the cedant aggregation with the "transaction"= "cedant" parameter
 curl
@@ -86,7 +86,7 @@ curl
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-  https://app.allphins.com/api/v1/clash_scenarios/scenario_lists/
+  https://api.allphins.com/api/v1/clash_scenarios/scenario_lists/
 
 ```
 
@@ -126,7 +126,7 @@ This endpoint retrieves all the scenarios of a given scenario list.
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/clash_scenarios/scenarios_list/`
+`POST https://api.allphins.com/api/v1/clash_scenarios/scenarios_list/`
 
 ### URL Arguments
 

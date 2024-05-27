@@ -5,7 +5,7 @@
 
 
 ```shell
-curl https://app.allphins.com/api/v1/assets/
+curl https://api.allphins.com/api/v1/assets/
   -H "Authorization: Bearer YourAccessToken"
 ```
 
@@ -31,7 +31,7 @@ The access token is valid for 5 minutes and the refresh token is valid for 1 day
 > Example request:
 
 ```shell
-curl https://app.allphins.com/api/v1/token/ \
+curl https://apapip.allphins.com/api/v1/token/ \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"username": "string", "password": "string"}'
@@ -48,7 +48,7 @@ curl https://app.allphins.com/api/v1/token/ \
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/token/`
+`POST https://api.allphins.com/api/v1/token/`
 
 ### Payload
 
@@ -62,7 +62,7 @@ password | string | password    | yes
 > Example request:
 
 ```shell
-curl https://app.allphins.com/api/v1/token/refresh/ \
+curl https://api.allphins.com/api/v1/token/refresh/ \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"refresh": "string"}' 
@@ -82,7 +82,7 @@ The new access token is valid for 5 minutes.
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/token/refresh/`
+`POST https://api.allphins.com/api/v1/token/refresh/`
 
 ### Payload
 Argument | type   | Description        | Mandatory
@@ -94,7 +94,7 @@ refresh | string | Your refresh token | yes
 > Example request:
 
 ```shell
-curl https://app.allphins.com/api/v1/token/verify/ \
+curl https://api.allphins.com/api/v1/token/verify/ \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"token": "string"}' 
@@ -113,7 +113,7 @@ If the token is invalid or expired, it returns a 401 error.
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/token/verify/`
+`POST https://api.allphins.com/api/v1/token/verify/`
 
 ### Payload
 Argument | type   | Description                | Mandatory
@@ -125,7 +125,7 @@ token | string | The access token to verify | yes
 > Example request:
 
 ```shell
-curl https://app.allphins.com/api/v1/token/blacklist/ \
+curl https://api.allphins.com/api/v1/token/blacklist/ \
   -X POST \
   -H "Content-Type: application/json" \
   -d '{"refresh": "string"}' 
@@ -141,7 +141,7 @@ Blacklists a refresh token. An access token cannot be blacklisted.
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/token/blacklist/`
+`POST https://api.allphins.com/api/v1/token/blacklist/`
 
 ### Payload
 Argument | type   | Description               | Mandatory

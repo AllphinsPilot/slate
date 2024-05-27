@@ -43,7 +43,7 @@ Every category has its own attributes.
 ## Retrieve all assets
 
 ```shell
-curl https://app.allphins.com/api/v1/assets/
+curl https://api.allphins.com/api/v1/assets/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -87,7 +87,7 @@ This endpoint retrieves all assets.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/assets/`
+`GET https://api.allphins.com/api/v1/assets/`
 
 ### Query Arguments
 
@@ -99,7 +99,7 @@ Argument | Default | Description
 ## Retrieve an asset
 
 ```shell
-curl https://app.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
+curl https://api.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -182,7 +182,7 @@ This endpoint retrieves a specific asset.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/assets/:id/`
+`GET https://api.allphins.com/api/v1/assets/:id/`
 
 ### URL Arguments
 

@@ -3,7 +3,7 @@
 ## Retrieve all flags
 
 ```shell
-curl https://app.allphins.com/api/v1/flags/
+curl https://api.allphins.com/api/v1/flags/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -218,7 +218,7 @@ This endpoint retrieves all flags.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/flags/`
+`GET https://api.allphins.com/api/v1/flags/`
 
 ### The flag object
 
@@ -243,7 +243,7 @@ Attribute | Type | Description
 ## Retrieve a flag
 
 ```shell
-curl https://app.allphins.com/api/v1/flags/29647993-4153-4b0e-bbd5-c9239cf79ad5/
+curl https://api.allphins.com/api/v1/flags/29647993-4153-4b0e-bbd5-c9239cf79ad5/
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -267,7 +267,7 @@ This endpoint retrieves a specific flag.
 
 ### HTTP Request
 
-`GET https://app.allphins.com/api/v1/flags/:id/`
+`GET https://api.allphins.com/api/v1/flags/:id/`
 
 ### URL Arguments
 

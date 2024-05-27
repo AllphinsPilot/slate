@@ -8,7 +8,7 @@ curl
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-  https://app.allphins.com/api/v1/countries/
+  https://api.allphins.com/api/v1/countries/
 ```
 
 > The above command returns JSON structured like this:
@@ -70,7 +70,7 @@ This service is build with Machine Learning models and Natural Language Processi
 
 ### HTTP Request
 
-`POST https://app.allphins.com/api/v1/extract/`
+`POST https://api.allphins.com/api/v1/extract/`
 
 ### Query Arguments
 
