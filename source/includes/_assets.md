@@ -2,29 +2,29 @@
 
 ## Asset Object Attributes
 
-Attribute | Type | Description
---------- | ------- | -----------
-`id` | *UUID* | Unique identifier for the object.
-`name` | *string* | Asset name (usually the most popular).
-`aliases` | *list* | List of possible aliases for this asset.
-`companies` | *list* | List of [`companies`](#companies) owning the asset.
-`status` | *string* | Status of the object (in place, planned or removed).
-`asset_category` | *string* | Major category of an asset.
-`asset_type` | *string* | Asset type.
-`asset_subtype` | *list of strings* | Subtype of an asset.
-`country_code` | *string* | Country code.
-`images` | *list of strings* | List of images urls.
-`news` | *list of objects* | List of news concerning the asset.
-`linked_assets` | *list of objects* | List of assets dependencies.
-`indicators` | *object* | Simple statistics on the asset.
-`location` | *list of objects* | List of locations.
-`installation_date` | *integer* | Installation year.
-`installation_date_normalized` | *timestamp* | Installation date.
-`general_comment` | *string* | Comment on the asset.
-`capex_estimate` | *float* | Estimated replacement value in Million dollars.
-`created_at` | *timestamp* | Creation date of the asset.
-`updated_at` | *timestamp* | last update on the asset.
-`other_info` | *object* | Json with additional data.
+| Attribute                      | Type              | Description                                          |
+|--------------------------------|-------------------|------------------------------------------------------|
+| `id`                           | *UUID*            | Unique identifier for the object.                    |
+| `name`                         | *string*          | Asset name (usually the most popular).               |
+| `aliases`                      | *list*            | List of possible aliases for this asset.             |
+| `companies`                    | *list*            | List of companies owning the asset.                  |
+| `status`                       | *string*          | Status of the object (in place, planned or removed). |
+| `asset_category`               | *string*          | Major category of an asset.                          |
+| `asset_type`                   | *string*          | Asset type.                                          |
+| `asset_subtype`                | *list of strings* | Subtype of an asset.                                 |
+| `country_code`                 | *string*          | Country code.                                        |
+| `images`                       | *list of strings* | List of images urls.                                 |
+| `news`                         | *list of objects* | List of news concerning the asset.                   |
+| `linked_assets`                | *list of objects* | List of assets dependencies.                         |
+| `indicators`                   | *object*          | Simple statistics on the asset.                      |
+| `location`                     | *list of objects* | List of locations.                                   |
+| `installation_date`            | *integer*         | Installation year.                                   |
+| `installation_date_normalized` | *timestamp*       | Installation date.                                   |
+| `general_comment`              | *string*          | Comment on the asset.                                |
+| `capex_estimate`               | *float*           | Estimated replacement value in Million dollars.      |
+| `created_at`                   | *timestamp*       | Creation date of the asset.                          |
+| `updated_at`                   | *timestamp*       | Last update on the asset.                            |
+| `other_info`                   | *object*          | Json with additional data.                           |
 
 
 **Specific Attributes**

@@ -55,7 +55,7 @@ curl https://api.allphins.com/api/v1/portfolios/ \
 This endpoint retrieves all portfolios of a given user. This will also return portfolios shared by other users with the current user.
 
 ```shell
-curl https://api.allphins.com/api/v1/portfolios/
+curl https://api.allphins.com/api/v1/portfolios/?label=in_force \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -120,7 +120,7 @@ curl https://api.allphins.com/api/v1/portfolios/
 
 `GET https://api.allphins.com/api/v1/portfolios/`
 
-### URL Parameters
+### Querry Parameters
 
 | Parameter | Description                                                                                                                      |
 | --------- |----------------------------------------------------------------------------------------------------------------------------------|
@@ -194,7 +194,7 @@ curl https://api.allphins.com/api/v1/portfolios/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
 
 `GET https://api.allphins.com/api/v1/portfolios/:id/`
 
-### URL Parameters
+### Query Parameters
 
 | Parameter | Description                         |
 | --------- | ----------------------------------- |

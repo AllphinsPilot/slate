@@ -1,6 +1,6 @@
 # Policies
 
-A policy is an insurance or reinssurance policy. It's dependent of a portfolio (which contains the risks) and contains all the financial parameters of the policy.
+A policy is an insurance or reinsurance policy. It's dependent of a portfolio (which contains the risks) and contains all the financial parameters of the policy.
 
 ## Policy Object Attributes
 
