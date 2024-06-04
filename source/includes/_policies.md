@@ -4,29 +4,29 @@ A policy is an insurance or reinsurance policy. It's dependent of a portfolio (w
 
 ## Policy Object Attributes
 
-| Attribute         | Type       | Description                                                        |
-| ----------------- | ---------- | ------------------------------------------------------------------ |
-| `id`              | _int_      | Unique identifier for the object.                                  |
-| `type`            | _string_   | Policy type: `direct`, `excess_of_loss` or `quota_share`.          |
-| `portfolio`       | _string_   | ID of the [`portfolio`](#portfolios) object.                       |
-| `premium_100`     | _float_    | Premium at 100% share.                                             |
-| `premium_currency`| _string_   | Premium currency.                                                  |
-| `usd_premium_100` | _float_    | USD Premium at 100% share.                                         |
-| `benefit_from`    | _list_     | List of benefiting policies.                                       |
-| `limit`           | _float_    | Policy limit.                                                      |
-| `limit_currency`  | _string_   | Limit currency.                                                    |
-| `excess`          | _float_    | Policy excess.                                                     |
-| `excess_currency` | _string_   | Excess currency.                                                   |
-| `start_date`      | _datetime_ | Start date of the policy.                                          |
-| `end_date`        | _datetime_ | End date of the policy.                                            |
-| `risk_attached`   | _bool_     | Is it a risk attaching policy.                                     |
-| `share`           | _float_    | Policy share.                                                      |
-| `combined_ratio`  | _float_    | Combined ratio of the policy.                                      |
-| `status`          | _string_   | Policy status: `written`, `quote`, `declined`, `not_taken_up`.     |
-| `reinstatement`   | _float_    | Reinstatement percentage.                                          |
-| `reference`       | _string_   | Policy reference.                                                  |
-| `description`     | _float_    | Policy description.                                                |
-| `tags`            | _list_     | List of tags.                                                      |
+| Attribute          | Type       | Description                                                    |
+|--------------------|------------|----------------------------------------------------------------|
+| `id`               | _int_      | Unique identifier for the object.                              |
+| `type`             | _string_   | Policy type: `direct`, `excess_of_loss` or `quota_share`.      |
+| `portfolio`        | _string_   | ID of the [`portfolio`](#portfolios) object.                   |
+| `premium_100`      | _float_    | Premium at 100% share.                                         |
+| `premium_currency` | _string_   | Premium currency.                                              |
+| `usd_premium_100`  | _float_    | USD Premium at 100% share.                                     |
+| `benefit_from`     | _list_     | List of benefiting policies.                                   |
+| `limit`            | _float_    | Policy limit.                                                  |
+| `limit_currency`   | _string_   | Limit currency.                                                |
+| `excess`           | _float_    | Policy excess.                                                 |
+| `excess_currency`  | _string_   | Excess currency.                                               |
+| `start_date`       | _datetime_ | Start date of the policy.                                      |
+| `end_date`         | _datetime_ | End date of the policy.                                        |
+| `risk_attached`    | _bool_     | Is it a risk attaching policy.                                 |
+| `share`            | _float_    | Policy share.                                                  |
+| `combined_ratio`   | _float_    | Combined ratio of the policy.                                  |
+| `status`           | _string_   | Policy status: `written`, `quote`, `declined`, `not_taken_up`. |
+| `reinstatement`    | _float_    | Reinstatement percentage.                                      |
+| `reference`        | _string_   | Policy reference.                                              |
+| `description`      | _float_    | Policy description.                                            |
+| `tags`             | _list_     | List of tags.                                                  |
 
 ## Retrieve all policies
 
