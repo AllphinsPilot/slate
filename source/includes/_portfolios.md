@@ -200,3 +200,195 @@ curl https://api.allphins.com/api/v1/portfolios/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxx
 | Parameter | Description                         |
 | --------- | ----------------------------------- |
 | `id`      | The ID of the portfolio to retrieve |
+
+## Get portfolio analytics
+
+This endpoint returns analytics for a portfolio. Results can be displayed as a table (split by a single dimension) or as a matrix (multi-dimensional). An optional comparison portfolio can be passed to diff metrics between two portfolios.
+
+### HTTP Request
+
+`POST https://api.allphins.com/api/v1/portfolios/:id/analytics/`
+
+### Payload
+
+| Parameter                 | Type         | Required                            | Description                                                                                |
+|---------------------------|--------------|-------------------------------------|--------------------------------------------------------------------------------------------|
+| `view`                    | _str_        | yes                                 | View format: `table` or `matrix`.                                                          |
+| `in_force_date`           | _str_        | yes                                 | In-force date in ISO 8601 format (e.g. `2026-04-30`).                                      |
+| `split`                   | _str_        | no (default `attachment_point`)     | Dimension to split the analytics by. See list of accepted values below.                    |
+| `filters`                 | _list[dict]_ | yes                                 | List of filters to apply on the portfolio risks. Pass `[]` if no filter is needed. See "Filter attributes" below. |
+| `comparison_portfolio_id` | _UUID_       | no                                  | ID of another portfolio to compare against.                                                |
+
+### Accepted `split` values
+
+The accepted values for `split` depend on the line of business of the portfolio.
+
+| Line of business            | Accepted splits                                                                                                                    |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `Terror direct fac`         | `country`, `state`, `county`, `city`, `zip_code`, `peril`, `occupancy`, `year_built`, `address_precision`, `construction_material` |
+| `Political Risk`            | `tenor`, `obligor_v2_country`, `country`, `risk_code`, `lloyds_pr_industry`                                                        |
+| `Political Risk direct fac` | `tenor`, `obligor_v2_country`, `country`, `risk_code`, `lloyds_pr_industry`, `trade_direct_status`                                 |
+| `Casualty`                  | `attachment_point`, `country`, `naics_sector`, `naics_subsector`, `insured_revenue`                                                |
+| `Cyber`                     | `attachment_point`, `country`, `naics_sector`, `naics_subsector`, `insured_revenue`, `cyber_cover_type`, `tech_stack`              |
+
+```shell
+curl https://api.allphins.com/api/v1/portfolios/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/analytics/ \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  -d '{"view":"table","in_force_date":"2024-12-31","split":"country","filters":[]}'
+```
+
+> The above command returns JSON structured like this (table view):
+
+```json
+{
+  "data": [
+    {"split": "United States", "column1": 1234567, "column2": 89},
+    {"split": "France",        "column1":  234567, "column2": 12}
+  ]
+}
+```
+
+> Or, when `view` is `matrix`:
+
+```json
+{
+  "dimension1": [
+    {"split": "value1", "column1": "value2"}
+  ],
+  "dimension2": [
+    {"split": "value3", "column1": "value4"}
+  ]
+}
+```
+
+## Get portfolio EDM analytics
+
+This endpoint returns EDM analytics for a portfolio. Results are returned in three blocks: `current` (the requested portfolio), `comparison` (a second portfolio if `comparison_portfolio_id` is provided, otherwise `null`) and `variation` (the diff between the two).
+
+This endpoint is only available for Terror, Property and Energy Onshore lines of business.
+
+### HTTP Request
+
+`POST https://api.allphins.com/api/v1/portfolios/:id/edm_analytics/`
+
+### Payload
+
+| Parameter                 | Type         | Required | Description                                                                                                          |
+|---------------------------|--------------|----------|----------------------------------------------------------------------------------------------------------------------|
+| `view`                    | _str_        | yes      | View format: `table` or `matrix`.                                                                                    |
+| `split`                   | _str_        | yes      | Dimension to split by. Accepted values depend on `view` (see below).                                                 |
+| `filters`                 | _list[dict]_ | yes      | List of filters to apply on the portfolio risks. Pass `[]` if no filter is needed. See "Filter attributes" below.    |
+| `comparison_portfolio_id` | _UUID_       | no       | ID of another portfolio to compare against.                                                                          |
+
+### Accepted `split` values
+
+When `view` is `table`, the accepted values for `split` depend on the line of business:
+
+| Line of business    | Accepted splits                                                                                                                                                                                                                             |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Energy Onshore`    | `attachment_point`, `country`, `state`, `county`, `city`, `occupancy`, `geo_resolution`, `distance_to_shore`, `loss_type`, `peril`, `region`, `year_built`, `construction_material_building`, `construction_material_others`, `exposure_set`, `asset_match` |
+| `Property`          | `attachment_point`, `country`, `state`, `county`, `city`, `occupancy`, `geo_resolution`, `distance_to_shore`, `loss_type`, `peril`, `region`, `year_built`, `construction_material_building`, `construction_material_others`, `exposure_set`                |
+| `Terror`            | `attachment_point`, `country`, `state`, `county`, `city`, `occupancy`, `geo_resolution`, `distance_to_shore`, `loss_type`, `peril`, `region`, `year_built`, `construction_material_building`, `construction_material_others`, `exposure_set`                |
+| `Terror direct fac` | `country`, `state`, `county`, `city`, `zip_code`, `peril`, `occupancy`, `year_built`, `address_precision`, `construction_material`                                                                                                          |
+
+When `view` is `matrix`:
+
+`attachment_point`, `geo_resolution`, `location_enrichment_details`.
+
+### Filter attributes
+
+Each entry in the `filters` list is an object with the following shape:
+
+| Field             | Type            | Description                                                                                       |
+|-------------------|-----------------|---------------------------------------------------------------------------------------------------|
+| `operator`        | _str_           | Comparison operator. Currently `is` (membership in `value`).                                      |
+| `attribute`       | _str_           | Attribute name to filter on. See list of supported attributes below.                              |
+| `value`           | _list[int]_     | List of accepted attribute IDs.                                                                   |
+| `label`           | _list[str]_     | Human-readable labels matching `value` (display only).                                            |
+| `attribute_value` | _list[str]_     | Attribute codes matching `value` (display only).                                                  |
+
+Example:
+
+```json
+[
+  {
+    "filters": [
+      {
+        "operator": "is",
+        "attribute": "property_peril",
+        "value": [67113764],
+        "label": ["Fire (5)"],
+        "attribute_value": ["FR"]
+      }
+    ]
+  }
+]
+```
+
+#### Supported attributes
+
+##### `attribute = "property_peril"`
+
+| ID         | Name                    | Code  |
+|------------|-------------------------|-------|
+| 67113760   | Earthquake (1)          | EQ    |
+| 67113761   | Windstorm (2)           | WS    |
+| 67113762   | Winterstorm (3)         | WT    |
+| 67113763   | Flood (4)               | FL    |
+| 67113764   | Fire (5)                | FR    |
+| 67113765   | Terrorism (6)           | TR    |
+| 74511196   | Severe Convective Storm | SCS   |
+| 117332703  | Smoke                   | SM    |
+
+##### `attribute = "terror_risk_code"`
+
+| ID         | Name         | Code         |
+|------------|--------------|--------------|
+| 16373262   | CYBER        | cyber        |
+| 3164513    | NCBR         | ncbr         |
+| 1762605    | SRCC         | srcc         |
+| 1762607    | WAR          | war          |
+| 1762606    | TERROR       | tr           |
+| 75944889   | AVIATION WAR | AVIATION WAR |
+
+```shell
+curl https://api.allphins.com/api/v1/portfolios/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/edm_analytics/ \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
+  -d '{"view":"table","split":"country","filters":[]}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "current": {
+    "data": [
+      {"split": "United States", "tiv": 1234567},
+      {"split": "France",        "tiv":  234567}
+    ]
+  },
+  "comparison": null,
+  "variation": null
+}
+```
+
+> When `view` is `matrix`, each block holds a multi-dimensional object:
+
+```json
+{
+  "current": {
+    "dimension1": [
+      {"split": "value1", "column1": "value2"}
+    ],
+    "dimension2": [
+      {"split": "value3", "column1": "value4"}
+    ]
+  },
+  "comparison": null,
+  "variation": null
+}
+```
