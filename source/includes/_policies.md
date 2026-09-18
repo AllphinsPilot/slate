@@ -12,7 +12,6 @@ A policy is an insurance or reinsurance policy. It's dependent of a portfolio (w
 | `premium_100`      | _float_    | Premium at 100% share.                                         |
 | `premium_currency` | _string_   | Premium currency.                                              |
 | `usd_premium_100`  | _float_    | USD Premium at 100% share.                                     |
-| `benefit_from`     | _list_     | List of benefiting policies.                                   |
 | `limit`            | _float_    | Policy limit.                                                  |
 | `limit_currency`   | _string_   | Limit currency.                                                |
 | `excess`           | _float_    | Policy excess.                                                 |
@@ -27,6 +26,24 @@ A policy is an insurance or reinsurance policy. It's dependent of a portfolio (w
 | `reference`        | _string_   | Policy reference.                                              |
 | `description`      | _float_    | Policy description.                                            |
 | `tags`             | _list_     | List of tags.                                                  |
+| `client_id`                            | _int_      | ID of the client the portfolio belongs to.                     |
+| `client_name`                          | _string_   | Name of the client the portfolio belongs to.                   |
+| `portfolio_name`                       | _string_   | Name of the [`portfolio`](#portfolios) the policy belongs to.  |
+| `dates`                                | _json_     | Object representation of the start date and end date.          |
+| `benefits`                             | _list_     | List of the benefits.                                          |
+| `rules`                                | _list_     | Sublimit rules.                                                |
+| `outward_filter`                       | _json_     | Outward filters.                                               |
+| `rol`                                  | _float_    | Rate on line of the policy.                                    |
+| `usd_limit`                            | _float_    | Limit converted to USD.                                        |
+| `usd_excess`                           | _float_    | Excess converted to USD.                                       |
+| `annual_aggregate_deductible`          | _float_    | Annual aggregate deductible.                                   |
+| `annual_aggregate_deductible_currency` | _string_   | Currency of the annual aggregate deductible.                   |
+| `floating_deductible_currency`         | _string_   | Currency of the floating deductible.                           |
+| `usd_floating_deductible`              | _float_    | Floating deductible converted to USD.                          |
+| `ilw_currency`                         | _string_   | Currency of the industry loss warranty.                        |
+| `usd_ilw`                              | _float_    | Industry loss warranty converted to USD.                       |
+
+<aside class="warning">Listing policies and retrieving one do not return quite the same object: <code>attachment_point</code>, <code>client_id</code>, <code>client_name</code>, <code>dates</code>, <code>deployed_limit</code>, <code>portfolio_labels</code> and <code>usd_excess</code> are only returned by <code>GET /policies/</code>, while <code>line_of_business</code> is only returned by <code>GET /policies/:id/</code>.</aside>
 
 ## Retrieve all policies
 

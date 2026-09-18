@@ -42,6 +42,15 @@ The portfolio object links policies to a list of risks. It belongs to a client a
 | `year_of_account` | _int_ | Year of account                             |
 | `client`          | _int_ | Client ID                                   |
 | `transaction`     | _str_ | Type of transaction (`inward` or `outward`) |
+| `display_currency`       | _string_ | Currency the portfolio figures are shown in.        |
+| `maximum_line_currency`  | _string_ | Currency of the maximum line.                       |
+| `usd_maximum_line`       | _float_  | Maximum line converted to USD.                      |
+| `total_income_currency`  | _string_ | Currency of the total income.                       |
+| `usd_total_income`       | _float_  | Total income converted to USD.                      |
+| `fx_vector_id`           | _int_    | ID of the FX vector applied to the portfolio.       |
+| `label_ids`              | _list_   | IDs of the labels attached to the portfolio.        |
+
+<aside class="warning">Listing portfolios and retrieving one do not return quite the same object: <code>data_update_time</code>, <code>datasources</code>, <code>main_datasource_status</code>, <code>mapped_perils</code>, <code>next_renewal</code>, <code>policies_labels</code> and <code>section</code> are only returned by <code>GET /portfolios/</code>, while <code>datasources_light</code>, <code>fx_vector_id</code>, <code>label_ids</code>, <code>legacy</code>, <code>max_policy_date</code>, <code>portfolio_class</code>, <code>risks_ready</code> and <code>tabs</code> are only returned by <code>GET /portfolios/:id/</code>.</aside>
 
 ```shell
 curl https://api.allphins.com/api/v1/portfolios/ \
