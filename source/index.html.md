@@ -13,6 +13,7 @@ includes:
   - portfolios
   - policies
   - exposures
+  - risk_exports
   - scenarios
   - assets
   - errors
