@@ -87,7 +87,7 @@ curl
   -X POST
   -H "Content-Type: application/json"
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
-  https://api.allphins.com/api/v1/scenarios_list/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/compute/
+  https://api.allphins.com/api/v1/scenario_lists/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/computeV3/
 ```
 
 > The above command returns JSON structured like this:
@@ -95,7 +95,7 @@ curl
 ```json
 {
   "count": 34576,
-  "next": "https://api.allphins.com/api/v1/scenarios_list/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/compute/?page=2",
+  "next": "https://api.allphins.com/api/v1/scenario_lists/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/computeV3/?page=2",
   "previous": null,
   "results": [
     {
@@ -178,7 +178,7 @@ This endpoint retrieves all the scenarios of a given scenario list.
 
 ### HTTP Request
 
-`POST https://api.allphins.com/api/v1/scenarios_list/:id/compute/`
+`POST https://api.allphins.com/api/v1/scenario_lists/:id/computeV3/`
 
 ### URL Arguments
 
