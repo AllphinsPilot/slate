@@ -2,7 +2,7 @@
 
 A risk export extracts the underlying EDM/CEDE locations of a book as [Parquet](https://parquet.apache.org/) files.
 
-Extracts are asynchronous: a filtered slice takes seconds, a whole book can take hours, so you ask for one, then download it once it is ready. Nothing is streamed through the API — the files are written to cloud storage and you fetch them directly, so the size of an extract is never limited by a request timeout.
+Extracts are asynchronous: you ask for one, then download it once it is ready. Nothing is streamed through the API — the files are written to cloud storage and you fetch them directly, so the size of an extract is never limited by a request timeout.
 
 Exports are only available for lines of business backed by EDM/CEDE data: Terror, Property and Onshore Energy. Asking for one on any other line of business returns a `400`.
 
@@ -15,7 +15,8 @@ Exports are only available for lines of business backed by EDM/CEDE data: Terror
 | `name`          | _string_ | Free text, shown in the app.                                                 |
 | `config`        | _json_   | The filters the extract was asked for. See below.                            |
 | `status`        | _string_ | `created`, `computing`, `ready` or `error`.                                  |
-| `download_urls` | _list_   | One signed URL per Parquet file. Empty until `status` is `ready`.            |
+| `description`   | _string_ | Free text.                                                                   |
+| `download_urls` | _list_   | One signed URL per Parquet file. Empty until `status` is `ready`. Each URL is valid for 7 days. |
 
 ### Config Attributes
 
@@ -23,8 +24,8 @@ Every filter is optional, and they combine: an extract narrowed by both a scenar
 
 | Attribute       | Type     | Description                                                                                          |
 | --------------- | -------- | ---------------------------------------------------------------------------------------------------- |
-| `portfolio_ids` | _list_   | [`Portfolio`](#portfolios) IDs. Omit to extract every **active** portfolio — those carrying a written policy still in force. Naming portfolios explicitly returns them whatever their state, so quotes and future books stay reachable. |
-| `scenario_id`   | _int_    | ID of a [`scenario`](#scenarios): keeps the risks it accumulates.                                     |
+| `portfolio_ids` | _list_   | [`Portfolio`](#portfolios) IDs of your active group. Omit to extract every **active** portfolio: those carrying a written policy whose end date is after today. Naming portfolios explicitly returns them whatever their state, so quotes and future books stay reachable. An unknown ID fails the export. |
+| `scenario_id`   | _int_    | ID of a [`scenario`](#scenarios) of your active group: keeps the risks it accumulates.                |
 | `assets`        | _list_   | Asset labels. An unknown label fails the export rather than being ignored.                            |
 | `asset_groups`  | _list_   | Asset group labels. Same rule.                                                                        |
 | `columns`       | _list_   | Column names to keep. Omit for every column. Narrowing them makes an extract considerably smaller.     |
@@ -52,6 +53,7 @@ curl https://api.allphins.com/api/v1/reports/
 {
   "id": "0d929dd4-a399-4773-9042-267491296a99",
   "name": "EDM risks export",
+  "description": null,
   "type": "edm_risk_export",
   "config": {
     "portfolio_ids": ["443cb85b-eb01-4c68-9c7b-b3edbfa17153"],
@@ -88,12 +90,19 @@ curl https://api.allphins.com/api/v1/reports/0d929dd4-a399-4773-9042-267491296a9
 ```json
 {
   "id": "0d929dd4-a399-4773-9042-267491296a99",
+  "name": "EDM risks export",
+  "description": null,
+  "config": {
+    "portfolio_ids": ["443cb85b-eb01-4c68-9c7b-b3edbfa17153"],
+    "assets": ["Sleipner"]
+  },
+  "type": "edm_risk_export",
   "status": "computing",
   "download_urls": []
 }
 ```
 
-> Once it is ready:
+> Once it is ready (other fields unchanged):
 
 ```json
 {
@@ -106,9 +115,9 @@ curl https://api.allphins.com/api/v1/reports/0d929dd4-a399-4773-9042-267491296a9
 }
 ```
 
-Poll this endpoint until `status` is `ready`. Back off between calls — an extract can run for hours, and there is nothing to gain from asking every second.
+Poll this endpoint until `status` is `ready`. Back off between calls; there is nothing to gain from asking every second.
 
-A `status` of `error` means the extract failed; the reason is in the notification in the app.
+A `status` of `error` means the extract failed, for example on an unknown portfolio, scenario, asset or asset group. Start a new export after fixing the config, or contact support.
 
 ### HTTP Request
 
@@ -126,7 +135,7 @@ A `status` of `error` means the extract failed; the reason is in the notificatio
 curl -o risks-000000000000.parquet "https://storage.googleapis.com/...?X-Goog-Signature=..."
 ```
 
-The URLs are signed and lead straight to cloud storage — no authentication header is needed on them, and nothing goes through the API.
+The URLs are signed and lead straight to cloud storage — no authentication header is needed on them, and nothing goes through the API. Each URL expires 7 days after it was issued. Every call to `GET /reports/:id/` issues fresh URLs, so retrieve the export again to get new ones.
 
 An extract is split into several files, which is how Parquet is normally written. Read the directory rather than the files one by one, and every reader will treat them as a single dataset:
 
@@ -134,4 +143,4 @@ An extract is split into several files, which is how Parquet is normally written
 python -c "import pandas as pd; print(pd.read_parquet('./data').shape)"
 ```
 
-Each row is one location and one loss type, and carries the ID of the portfolio it belongs to along with every field of the underlying exposure file.
+Each row carries the `portfolio_id` of the portfolio it belongs to, along with the columns of the underlying EDM/CEDE data (all of them, or those named in `columns`).
