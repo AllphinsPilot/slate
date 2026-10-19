@@ -1,10 +1,15 @@
 steps:
-- name: 'ruby:2.6-slim'
+- name: 'ruby:2.7'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
-    gem install middleman \
-    && bundle exec middleman build --clean
+    set -euo pipefail
+    curl -fsSL https://nodejs.org/dist/v18.20.4/node-v18.20.4-linux-x64.tar.xz | tar -xJ -C /opt
+    export PATH=/opt/node-v18.20.4-linux-x64/bin:$$PATH
+    gem install bundler -v 2.4.22
+    bundle config set path /workspace/.bundle
+    bundle install --jobs 4 --retry 3
+    bundle exec middleman build --clean
 - name: gcr.io/cloud-builders/gsutil
   args: ["-m", "rsync", "-r", "-c", "-d", "./build", "gs://developers.allphins.com"]

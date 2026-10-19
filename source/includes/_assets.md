@@ -2,48 +2,49 @@
 
 ## Asset Object Attributes
 
-| Attribute                      | Type              | Description                                          |
-|--------------------------------|-------------------|------------------------------------------------------|
-| `id`                           | *UUID*            | Unique identifier for the object.                    |
-| `name`                         | *string*          | Asset name (usually the most popular).               |
-| `aliases`                      | *list*            | List of possible aliases for this asset.             |
-| `companies`                    | *list*            | List of companies owning the asset.                  |
-| `status`                       | *string*          | Status of the object (in place, planned or removed). |
-| `asset_category`               | *string*          | Major category of an asset.                          |
-| `asset_type`                   | *string*          | Asset type.                                          |
-| `asset_subtype`                | *list of strings* | Subtype of an asset.                                 |
-| `country_code`                 | *string*          | Country code.                                        |
-| `images`                       | *list of strings* | List of images urls.                                 |
-| `news`                         | *list of objects* | List of news concerning the asset.                   |
-| `linked_assets`                | *list of objects* | List of assets dependencies.                         |
-| `indicators`                   | *object*          | Simple statistics on the asset.                      |
-| `location`                     | *list of objects* | List of locations.                                   |
-| `installation_date`            | *integer*         | Installation year.                                   |
-| `installation_date_normalized` | *timestamp*       | Installation date.                                   |
-| `general_comment`              | *string*          | Comment on the asset.                                |
-| `capex_estimate`               | *float*           | Estimated replacement value in Million dollars.      |
-| `created_at`                   | *timestamp*       | Creation date of the asset.                          |
-| `updated_at`                   | *timestamp*       | Last update on the asset.                            |
-| `other_info`                   | *object*          | Json with additional data.                           |
-
+| Attribute                      | Type              | Description                                                         |
+|--------------------------------|-------------------|---------------------------------------------------------------------|
+| `id`                           | *UUID*            | Unique identifier for the object.                                   |
+| `name`                         | *string*          | Asset name (usually the most common one).                           |
+| `aliases`                      | *list of strings* | Other names of the asset.                                           |
+| `status`                       | *string*          | Status of the asset, for example `Operational`.                     |
+| `asset_category`               | *string*          | Major category of the asset (see below).                            |
+| `asset_type`                   | *string*          | Asset type.                                                         |
+| `asset_subtype`                | *string*          | Asset subtype.                                                      |
+| `country_code`                 | *string*          | ISO country code.                                                   |
+| `identification_numbers`       | *list of objects* | Identification numbers, such as an IMO number.                      |
+| `occupation`                   | *list of strings* | Occupation of the asset.                                            |
+| `operator`                     | *string*          | Operator of the asset.                                              |
+| `latitude`, `longitude`        | *string*          | Coordinates of the asset.                                           |
+| `location`                     | *object*          | Geographic data of the asset.                                       |
+| `images`                       | *list of objects* | Images of the asset.                                                |
+| `linked_assets`                | *list of objects* | Dependencies with other assets.                                     |
+| `production`                   | *list of objects* | Production figures.                                                 |
+| `indicators`                   | *object*          | Simple statistics on the asset.                                     |
+| `installation_date`            | *string*          | Installation date, as provided by the source.                       |
+| `installation_date_normalized` | *timestamp*       | Installation date.                                                  |
+| `general_comment`              | *string*          | Comment on the asset.                                               |
+| `capex_estimate`               | *float*           | Estimated replacement value in million dollars.                     |
+| `parent_id`, `parent_name`     | *UUID*, *string*  | Parent asset, if any.                                               |
+| `created_at`                   | *timestamp*       | Creation date of the asset.                                         |
+| `updated_at`                   | *timestamp*       | Last update on the asset.                                           |
+| `other_info`                   | *object*          | JSON with additional data.                                          |
 
 **Specific Attributes**
 
-Specific attributes depend on the asset category, here is a list of the possible categories:
+Specific attributes depend on the asset category. Categories include:
 
-* Offshore Installation
-* Onshore Installation
-* Offshore Mobile
-* Onshore Mobile
-* Renewable
-* Unknown
-
-Every category has its own attributes.
+* `offshore_installation`
+* `onshore_installation`
+* `offshore_mobile`
+* `onshore_mobile`
+* `renewable`
+* `unknown`
 
 ## Retrieve all assets
 
 ```shell
-curl https://api.allphins.com/api/v1/assets/
+curl "https://api.allphins.com/api/v1/assets/?name=cosmo&page=1" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -55,7 +56,6 @@ curl https://api.allphins.com/api/v1/assets/
     {
       "id": "3abba51f-e7fc-4af1-a65a-023d5b47745e",
       "name": "Cosmopolitan Field",
-      "companies": [],
       "status": "Operational",
       "aliases": [
         "Cosmopolitan (United States)"
@@ -65,25 +65,15 @@ curl https://api.allphins.com/api/v1/assets/
       "asset_subtype": "st_offshore_field_block",
       "country_code": "US",
       "identification_numbers": []
-    },
-    {
-      "id": "bd28d442-5ffb-4047-9698-b6912ca21e6c",
-      "name": "Cosmos Field",
-      "companies": [],
-      "status": "Operational",
-      "aliases": null,
-      "asset_category": "offshore_installation",
-      "asset_type": "offshore_field_block",
-      "asset_subtype": "st_offshore_field_block",
-      "country_code": "TN",
-      "identification_numbers": []
-    },
+    }
   ],
-  "count": 1000000
+  "count": 1
 }
 ```
 
-This endpoint retrieves all assets.
+This endpoint searches the asset database. Each item only holds the fields shown above; retrieve an asset for the rest.
+
+Results come 30 at a time. `page` selects the page; `start` and `end` select any slice instead (`start=0&end=100` returns the first 100). `count` is the total number of matches.
 
 ### HTTP Request
 
@@ -91,15 +81,21 @@ This endpoint retrieves all assets.
 
 ### Query Arguments
 
-Argument | Default | Description
---------- | ------- | -----------
-`name` | null | Free text to filter the query on the asset textual information (like name or aliases).
-
+Argument | Description
+--------- | -----------
+`name` or `q` | Free text searched in the asset's names, aliases and other text fields.
+`country` | Comma-separated country codes or regions.
+`company` | Comma-separated company names.
+`class` | Comma-separated categories, types or subtypes.
+`status` | Comma-separated statuses.
+`ids` | Comma-separated asset IDs.
+`page` | Page number, 30 assets per page.
+`start`, `end` | Slice of the results to return. Default `0` and `30`.
 
 ## Retrieve an asset
 
 ```shell
-curl https://api.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
+curl https://api.allphins.com/api/v1/assets/3abba51f-e7fc-4af1-a65a-023d5b47745e/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -108,38 +104,15 @@ curl https://api.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
 ```json
 {
   "id": "3abba51f-e7fc-4af1-a65a-023d5b47745e",
-  "companies": [
-    
-  ],
-  "images": [
-    
-  ],
-  "news": [
-    
-  ],
-  "linked_assets": [
-    
-  ],
-  "indicators": {
-    "capex_estimate": null
-  },
-  "production": [
-    
-  ],
   "location": {
     "locations": [
       {
         "type": "Feature",
         "geometry": {
           "type": "Point",
-          "coordinates": [
-            -151.902539,
-            59.860441
-          ]
+          "coordinates": [-151.902539, 59.860441]
         },
-        "properties": {
-          
-        }
+        "properties": {}
       }
     ],
     "initial_view_state": {
@@ -150,9 +123,15 @@ curl https://api.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
     "is_moving": false,
     "date": null
   },
-  "identification_numbers": [
-    
-  ],
+  "parent_name": null,
+  "parent_id": null,
+  "images": [],
+  "linked_assets": [],
+  "indicators": {
+    "capex_estimate": null
+  },
+  "production": [],
+  "identification_numbers": [],
   "name": "Cosmopolitan Field",
   "aliases": [
     "Cosmopolitan (United States)"
@@ -164,6 +143,7 @@ curl https://api.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
   "installation_date": null,
   "installation_date_normalized": null,
   "status": "Operational",
+  "operator": null,
   "general_comment": null,
   "capex_estimate": null,
   "latitude": "59.860441",
@@ -172,13 +152,13 @@ curl https://api.allphins.com/api/v1/assets/9f63a81b-ca34-4043-ada9-dcf41cdfe445
   "created_at": "2020-07-07T20:55:55.744133",
   "updated_at": "2020-12-21T10:47:55.258118",
   "other_info": null,
-  "geo_shape": 6545
+  "...": "..."
 }
 ```
 
 This endpoint retrieves a specific asset.
 
-<aside class="warning">Every asset type has its own attributes, for example an <code>offshore_installation</code> has a <code>water_depth</code> but a <code>onshore_installation</code> doesn't.</aside>
+<aside class="warning">Every asset category has its own attributes, for example an <code>offshore_installation</code> has a <code>water_depth_meter</code> but an <code>onshore_installation</code> doesn't.</aside>
 
 ### HTTP Request
 
