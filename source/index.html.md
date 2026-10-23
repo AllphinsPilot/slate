@@ -17,6 +17,7 @@ includes:
   - exposures
   - datasources
   - risk_exports
+  - scenario_risks_exports
   - scenarios
   - assets
   - errors
